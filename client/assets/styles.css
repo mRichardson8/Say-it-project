@@ -66,9 +66,14 @@ main {
   flex-direction: column; */
 }
 
+#form-title {
+  margin-bottom: 1rem;
+}
+
+#form-title,
 #form-text {
   width: 100%;
-  padding: 0.5rem 1rem;
+  padding: 0.3rem 1rem;
   border: 1px solid burlywood;
   border-radius: var(--radius);
   font-family: inherit;
@@ -94,7 +99,7 @@ main {
 
 /* Post List styles */
 .post-box {
-  max-width: 500px;
+  max-width: 600px;
   padding: 1rem;
   margin-bottom: 1.2rem;
   box-shadow: var(--light-shadow);
@@ -110,4 +115,30 @@ main {
 .post-text {
   line-height: 1.5rem;
   font-size: 0.9rem;
+  margin-bottom: 0.7rem;
+}
+
+/* Reactions - Emojis */
+
+.reactions-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.emoji-container {
+  display: flex;
+  align-items: center;
+  margin-right: 0.3rem;
+  padding: 0.3rem 0.4rem;
+  background-color: aliceblue;
+  border-radius: 1rem;
+}
+
+.img-emoji {
+  width: 18px;
+  margin-right: 0.25rem;
+}
+
+.emoji-count {
+  font-size: 0.8rem;
 }
