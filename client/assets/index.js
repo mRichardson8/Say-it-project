@@ -28,10 +28,7 @@ async function getPosts(){
         console.log(err)
 
     }
-  } catch (err) {
-    console.log(err);
   }
-}
 
 //! For testing createPost before server implementation
 function getTestPosts() {
@@ -53,7 +50,7 @@ function createPost(data) {
   let text = document.createElement("p");
   text.setAttribute("class", "post-text");
   text.innerText = data.post;
-  let reactions = document.createElement("div");
+  let reactions = createReactions(data.reactions)
   // add function to populate the reactions div
   let replies = document.createElement("div");
   //add function to populate the replies div
@@ -61,9 +58,28 @@ function createPost(data) {
   postList.appendChild(postBox);
 }
 
-function createReactions(reactArr){
+function createReactions(reactArr){ //reactArr = [1,2,3]
     let reactions = document.createElement('div')
     //TODO read from the array of reactions and create a div populated with the reaction emojis and their respective numbers
+    let div1 = document.createElement('div')
+    let span1 = document.createElement('span')
+    span1.innerText = reactArr[0]
+    let img1 = document.createElement('img')
+    img1.src = './assets/panic.gif'
+    div1.append(img1, span1)
+    let div2 = document.createElement('div')
+    let span2 = document.createElement('span')
+    span2.innerText = reactArr[1]
+    let img2 = document.createElement('img')
+    img2.src = './assets/emoji2.png'
+    div2.append(img2, span2)
+    let div3 = document.createElement('div')
+    let span3 = document.createElement('span')
+    span3.innerText = reactArr[2]
+    let img3 = document.createElement('img')
+    img3.src = './assets/emoji3.png'
+    div3.append(img3, span3)
+    reactions.append(div1,div2,div3)
     return reactions
 }
 
