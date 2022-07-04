@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const port = process.env.port || 3000;
-
+const blog = require('./data');
 
 
 const app = express();
@@ -11,6 +11,13 @@ app.use(bodyParser.json());
 
 app.get('/', (req,res) => {
     res.send('hello world!');
+})
+
+app.post('/blogs', (req, res) => {
+    const newBlog = req.body;
+    const newBlogId = blog.length + 1;
+    blog.push({id: newBlogId, ...newBlog});
+    res.send({messgae: `${newBlog.title} successafully added`})
 })
 
 
