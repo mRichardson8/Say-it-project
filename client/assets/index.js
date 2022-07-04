@@ -28,9 +28,11 @@ async function getPosts() {
     for (let i = 0; i < data.length; i++) {
       createPost(data[i]);
     }
+    addEmojiListeners()
   } catch (err) {
     console.log(err);
   }
+
 }
 
 //! For testing createPost before server implementation
@@ -39,6 +41,7 @@ function getTestPosts() {
   for (let i = 0; i < data.length; i++) {
     createPost(data[i]);
   }
+  addEmojiListeners()
 }
 
 //! This function takes in an individual post and renders the post, the reactions and the comments as HTML
@@ -106,6 +109,53 @@ function createReplies(repliesArr) {
 function submitPost(e) {
   return;
 }
+
+async function submitEmoji(e, index){
+  console.log("clicked", index)
+  e.currentTarget.children[1].innerText = (parseInt(e.currentTarget.children[1].innerText) + 1).toString()
+  let response = await fetch('localhost:3000/new', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({index: index})
+  })
+  if (response.status(204)){ 
+    //e.currentTarget.children[1].innerText = (parseInt(e.currentTarget.children[1].innerText) + 1).toString()
+  } else{
+      console.log("Huge error")
+      console.log(response.body)
+  }
+}
+
+
+function addEmojiListeners(){
+  document.querySelectorAll('.post-box div div:nth-child(1)').forEach((emoji) => {
+      emoji.addEventListener('click', emoji1Func)
+  })
+  document.querySelectorAll('.post-box div div:nth-child(2)').forEach((emoji) => {
+      emoji.addEventListener('click', emoji2Func)
+  })
+  document.querySelectorAll('.post-box div div:nth-child(3)').forEach((emoji) => {
+      emoji.addEventListener('click', emoji3Func)
+  })
+}
+
+function emoji1Func(event){
+  submitEmoji(event, 0)
+  event.currentTarget.removeEventListener('click', emoji1Func)
+}
+function emoji2Func(event){
+  submitEmoji(event, 1)
+  event.currentTarget.removeEventListener('click', emoji2Func)
+}
+function emoji3Func(event){
+  submitEmoji(event, 2)
+  event.currentTarget.removeEventListener('click', emoji3Func)
+}
+
+
 //event listeners
 
 // add a new div to handle the gif keyboard, this dif starts with display set to none but when button is clicked it becomes flex
