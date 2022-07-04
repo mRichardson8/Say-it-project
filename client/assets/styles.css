@@ -1,0 +1,50 @@
+/* header styles */
+body{
+    margin: 0;
+}
+
+header{
+    background-color: aliceblue;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+header h1{
+    margin: 20px;
+    font-size: 3rem;
+}
+
+/* Main */ 
+main{
+    width: 100%;
+}
+
+/* form styles */
+form#new-post-form{
+    display: flex;
+    flex-direction: column;
+}
+
+form #form-text{
+    height: 4rem;
+    word-wrap:normal
+}
+
+form div{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+form div #gif-btn{
+
+}
+
+form div #submit-btn{
+
+}
+
+/* Post List styles */
