@@ -3,13 +3,15 @@ const blogData = require('../data');
 class Blog {
     constructor(data) {
         this.id = data.id;
+        this.title = data.title;
         this.post = data.post;
+        this.image = data.image;
         this.reaction = data.reaction;
         this.reply = data.reply;
 
     }
 
-    
+
 }
 
 
