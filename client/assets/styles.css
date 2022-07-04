@@ -1,0 +1,113 @@
+/* Global styles */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+/*
+=============== 
+Variables
+===============
+*/
+
+:root {
+  --clr-white: #fff;
+  --ff-primary: "Lato", sans-serif;
+  --transition: all 0.3s linear;
+  --spacing: 0.25rem;
+  --radius: 0.3rem;
+  --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Header styling */
+
+header {
+  background-color: aliceblue;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  margin: 20px;
+  font-size: 3rem;
+}
+
+/* Main */
+main {
+  width: 90vw;
+  max-width: 1170px;
+  margin: 0 auto;
+}
+
+/* form styles */
+#new-post-form {
+  max-width: 600px;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius);
+  margin-bottom: 2rem;
+  box-shadow: var(--light-shadow);
+  /* display: flex;
+  flex-direction: column; */
+}
+
+#form-text {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid burlywood;
+  border-radius: var(--radius);
+  font-family: inherit;
+  outline: none;
+  word-wrap: normal;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+}
+
+.btn {
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: var(--radius);
+  text-transform: uppercase;
+  background-color: burlywood;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Post List styles */
+.post-box {
+  max-width: 500px;
+  padding: 1rem;
+  margin-bottom: 1.2rem;
+  box-shadow: var(--light-shadow);
+}
+
+.post-title {
+  text-transform: uppercase;
+  font-size: small;
+  color: brown;
+  margin-bottom: 0.75rem;
+}
+
+.post-text {
+  line-height: 1.5rem;
+  font-size: 0.9rem;
+}
