@@ -23,9 +23,10 @@ let testObj = [
 
 async function getPosts() {
   try {
-    let response = await fetch("localhost:3000/");
+    let response = await fetch("http://localhost:3000/blogs");
     let data = await response.json();
-    for (let i = 0; i < data.length; i++) {
+    console.log(data)
+    for (let i = 0; i < data.body; i++) {
       createPost(data[i]);
     }
     addEmojiListeners()
@@ -113,7 +114,7 @@ function submitPost(e) {
 async function submitEmoji(e, index){
   console.log("clicked", index)
   e.currentTarget.children[1].innerText = (parseInt(e.currentTarget.children[1].innerText) + 1).toString()
-  let response = await fetch('localhost:3000/new', {
+  let response = await fetch('localhost:3000/reactions', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -172,13 +173,13 @@ newPostForm.addEventListener("submit", async (e) => {
   let postTitle = "title"; // document.getElementById('post-title').value //TODO need to add a text input for title in the form
   let postBody = document.getElementById("form-text").value;
   let postGif = ""; //document.getElementById('post-img').src //TODO need to add blank img into the form details
-  let response = await fetch("localhost:3000/new", {
+  let response = await fetch("http://localhost:3000/blogs", {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ title: postTitle, post: postBody, img: postGif }),
+    body: JSON.stringify({ title: postTitle, post: postBody, image: postGif, reaction: [], reply: [] }),
   });
   if (response.status(204)) {
     location.reload();
