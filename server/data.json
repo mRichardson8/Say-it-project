@@ -1,0 +1,14 @@
+{
+  "posts": [
+    {
+      "title": "this is my stuff",
+      "post": "stuff",
+      "image": "",
+      "reaction": [],
+      "reply": [
+        "i like your stuff",
+        "your stuff sucks"
+      ]
+    }
+  ]
+}

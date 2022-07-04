@@ -1,4 +1,5 @@
 const blogData = require('../data');
+const fs = require("fs");
 
 class Blog {
     constructor(data) {
@@ -16,13 +17,65 @@ class Blog {
         return blogs; //might need to change this when we start reading and writing from the JSON file but for now this is fine
     }
 
-    static create(blog){
-        const newBlogId = blogData.length + 1;
-        const newBlog = new Blog({id: newBlogId, ...blog});
-        blogData.push((newBlog));
+    static create(funny){
+        //first we need to read the json file to see if there are any blogs
+        fs.readFile("../data.json", "utf8", (err, jsonString) => {
+         if(err) {
+             console.log("Error reading file from disk", err);
+             return
+         }
+         try {
+             const blog = JSON.parse(jsonString);
+             if(Object.entries(blog).length === 0) {
+                 const newBlogId = Object.entries(blog.posts).length + 1;
+                 const newBlog = new Blog({id: newBlogId, ...funny});  //first we create the new blog to be added to the json file
+ 
+            
+                 blog.posts.push(newBlog);
+                 fs.writeFile('../data.json', JSON.stringify(blog, null, 2), err => {
+                     if(err) {
+                         console.log("Error writing file: ", err)
+                     } else {
+                         console.log('Successfully wrote file');
+                     }
+                 })
+             }
+             else {
+                 const newBlogId = Object.entries(blog.posts).length + 1;
+                 const newBlog = new Blog({id: newBlogId, ...funny});  //first we create the new blog to be added to the json file
+ 
+        
+                 blog.posts.push(newBlog);
+                 fs.writeFile('../data.json', JSON.stringify(blog, null, 2), (err) =>{
+                     if(err){
+                         console.log("Error appending new blog to JSON: ", err);
+                     } else {
+                         console.log("\nFile contents of file after append: ", 
+                         fs.readFileSync("../data.json", "utf8"));
+                     }
+                 } )
+                 
+             }
+         } catch (err) {
+             console.log("Error parsing JSON string: ", err);
+         }
+        }
+        
+        );
+ 
+     }
 
-        return newBlog;
-    }
+       //First of all JSON fle cannot be completely empty, you need to make sure
+//it has atleast a pair of double curly braces "{}". Otherwise you will
+//get an error.
+
+
+       
+        
+        // blogData.push((newBlog));
+
+        // return newBlog;
+    
 
 
 }
