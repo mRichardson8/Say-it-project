@@ -11,6 +11,11 @@ class Blog {
 
     }
 
+    static get all(){
+        const blogs = blogData.map((blog) => new Blog(blog));
+        return blogs; //might need to change this when we start reading and writing from the JSON file but for now this is fine
+    }
+
 
 }
 

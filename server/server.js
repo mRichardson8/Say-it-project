@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const port = process.env.port || 3000;
 const blog = require('./data');
+const Blog = require('./models/blog');
 
 
 const app = express();
@@ -11,6 +12,11 @@ app.use(bodyParser.json());
 
 app.get('/', (req,res) => {
     res.send('hello world!');
+})
+
+app.get('/blogs', (req, res) => {
+    const blogs = Blog.all;
+    res.send(blogs);
 })
 
 app.post('/blogs', (req, res) => {
