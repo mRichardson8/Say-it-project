@@ -13,17 +13,15 @@ app.use(bodyParser.json());
 app.get('/', (req,res) => {
     res.send('hello world!');
 })
+app.post('/blogs', (req, res) => {
+    const data = req.body;
+    const newBlog = Blog.create(data);
+    res.send({message: `${newBlog.title} successafully added`})
+})
 
 app.get('/blogs', (req, res) => {
     const blogs = Blog.all;
     res.send(blogs);
-})
-
-app.post('/blogs', (req, res) => {
-    const newBlog = req.body;
-    const newBlogId = blog.length + 1;
-    blog.push({id: newBlogId, ...newBlog});
-    res.send({messgae: `${newBlog.title} successafully added`})
 })
 
 
