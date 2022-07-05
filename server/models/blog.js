@@ -14,7 +14,7 @@ class Blog {
     static get all(){
         let blogs; 
         try {
-            const jsonString = fs.readFileSync("../data.json", "utf8"); //need to change this back to one dot
+            const jsonString = fs.readFileSync("./data.json", "utf8"); //need to change this back to one dot
         
             const blog = JSON.parse(jsonString);
               
@@ -34,7 +34,7 @@ class Blog {
         //get an error.
 
         //first we need to read the json file to see if there are any blogs
-        fs.readFile("../data.json", "utf8", (err, jsonString) => {
+        fs.readFile("./data.json", "utf8", (err, jsonString) => {
          if(err) {
              console.log("Error reading file from data.json: ", err);
              return
@@ -47,7 +47,7 @@ class Blog {
  
             
                  blog.posts.push(newBlog);
-                 fs.writeFile('../data.json', JSON.stringify(blog, null, 2), err => {
+                 fs.writeFile('./data.json', JSON.stringify(blog, null, 2), err => {
                      if(err) {
                          console.log("Error writing file: ", err)
                      } else {
@@ -61,12 +61,12 @@ class Blog {
  
         
                  blog.posts.push(newBlog);
-                 fs.writeFile('../data.json', JSON.stringify(blog, null, 2), (err) =>{
+                 fs.writeFile('./data.json', JSON.stringify(blog, null, 2), (err) =>{
                      if(err){
                          console.log("Error appending new blog to JSON: ", err);
                      } else {
                          console.log("\nFile contents of file after append: ", 
-                         fs.readFileSync("../data.json", "utf8"));
+                         fs.readFileSync("./data.json", "utf8"));
                      }
                  } )
                  
@@ -83,7 +83,7 @@ class Blog {
      static getBlogById(blogId) {
         let blogs; 
         try {
-            const jsonString = fs.readFileSync("../data.json", "utf8"); // remember to remove one of the dots when you link to the endpoint
+            const jsonString = fs.readFileSync("./data.json", "utf8"); // remember to remove one of the dots when you link to the endpoint
         
             const blog = JSON.parse(jsonString);
               
@@ -103,16 +103,16 @@ class Blog {
 
     static addComment(blogId, reply){ 
         try {
-            const jsonString = fs.readFileSync("../data.json", "utf8"); //need to change this back to one dot
+            const jsonString = fs.readFileSync("./data.json", "utf8"); //need to change this back to one dot
         
             const blog = JSON.parse(jsonString);
             blog.posts[blogId-1].reply.push(reply)
-            fs.writeFile('../data.json', JSON.stringify(blog, null, 2), (err) =>{
+            fs.writeFile('./data.json', JSON.stringify(blog, null, 2), (err) =>{
                 if(err){
                     console.log("Error appending new blog to JSON: ", err);
                 } else {
                     console.log("\nFile contents of file after append: ", 
-                    fs.readFileSync("../data.json", "utf8"));
+                    fs.readFileSync("./data.json", "utf8"));
                 }
             } )
 
@@ -121,70 +121,9 @@ class Blog {
             }  
     }
         
-        // const selectedBlog = Blog.getBlogById(blogId);
-        // const repliesList = selectedBlog.reply;
-        // repliesList.push(reply);
-        // console.log(selectedBlog);
-        
-        
-        
-        
-
-        // fs.writeFile('../data.json', JSON.stringify(selectedBlog, null, 2), (err) =>{
-        //     if(err){
-        //         console.log("Error adding comment to JSON: ", err);
-        //     } else {
-        //         console.log("\nFile contents of file after append: ", 
-        //         fs.readFileSync("../data.json", "utf8"));
-        //     }
-        // } )
-
-        // return selectedBlog;
+       
+       
     }
-
-     
-
-
-
-// {
-//     "posts": [
-//       {
-//         "id": 1,
-//         "title": "this is my stuff",
-//         "post": "stuff",
-//         "image": "",
-//         "reaction": [],
-//         "reply": [
-//           "i like your stuff",
-//           "your stuff sucks"
-//         ]
-//       },
-//       {
-//         "id": 2,
-//         "title": "My love for chicken wings",
-//         "post": "I like chicken wings",
-//         "image": "",
-//         "reaction": [
-//           0,
-//           0,
-//           0
-//         ],
-//         "reply": []
-//       },
-//       {
-//         "id": 3,
-//         "title": "My love for chicken wings",
-//         "post": "I like chicken wings",
-//         "image": "",
-//         "reaction": [
-//           0,
-//           0,
-//           0
-//         ],
-//         "reply": []
-//       }
-//     ]
-//   }
 
 
 

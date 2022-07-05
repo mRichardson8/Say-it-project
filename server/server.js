@@ -15,7 +15,7 @@ app.get('/', (req,res) => {
 app.post('/blogs', (req, res) => {
     const data = req.body;
     const newBlog = Blog.create(data);
-    res.send({message: `${newBlog.title} successafully added`})
+    res.send({message: `${newBlog.title} successfully added`})
 })
 
 app.get('/blogs', (req, res) => {
@@ -35,6 +35,20 @@ app.get('/blogs/:id', (req,res) => {
         res.send(selectedBlog);
     }
     
+})
+
+app.post('/replies', (req,res) => {
+    const blogId = parseInt(req.body.id);
+    const reply = req.body.text;
+    const numOfBlogs = Blog.all.length;
+    
+    if(blogId > numOfBlogs || blogId <= 0){
+        const err = "Error: This blog doesn't exist."
+        res.send(err);
+    } else {
+        Blog.addComment(blogId,reply);
+        res.send({message: 'Reply successfully sent.'})
+    }
 })
 
 

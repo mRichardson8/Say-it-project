@@ -9,5 +9,5 @@ const fs = require('fs');
 
 
 
-Blog.addComment(1,"i like eggs");
+// Blog.addComment(1,"i like eggs");
 // Blog.getBlogById(1);
