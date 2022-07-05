@@ -1,4 +1,3 @@
-const blogData = require('../data');
 const fs = require("fs");
 
 class Blog {
@@ -13,15 +12,31 @@ class Blog {
     }
 
     static get all(){
-        const blogs = blogData.map((blog) => new Blog(blog));
-        return blogs; //might need to change this when we start reading and writing from the JSON file but for now this is fine
+        let blogs; 
+        try {
+            const jsonString = fs.readFileSync("./data.json", "utf8"); //need to change this back to one dot
+        
+            const blog = JSON.parse(jsonString);
+              
+            blogs = blog.posts.map((newBlog) => new Blog(newBlog)); 
+                   
+            console.log(blogs);
+            return blogs;
+
+            } catch (err) {
+                console.log(err);
+            }  
     }
 
     static create(funny){
+        //First of all JSON fle cannot be completely empty, you need to make sure
+        //it has atleast a pair of double curly braces "{}". Otherwise you will
+        //get an error.
+
         //first we need to read the json file to see if there are any blogs
-        fs.readFile("../data.json", "utf8", (err, jsonString) => {
+        fs.readFile("./data.json", "utf8", (err, jsonString) => {
          if(err) {
-             console.log("Error reading file from disk", err);
+             console.log("Error reading file from data.json: ", err);
              return
          }
          try {
@@ -32,7 +47,7 @@ class Blog {
  
             
                  blog.posts.push(newBlog);
-                 fs.writeFile('../data.json', JSON.stringify(blog, null, 2), err => {
+                 fs.writeFile('./data.json', JSON.stringify(blog, null, 2), err => {
                      if(err) {
                          console.log("Error writing file: ", err)
                      } else {
@@ -46,12 +61,12 @@ class Blog {
  
         
                  blog.posts.push(newBlog);
-                 fs.writeFile('../data.json', JSON.stringify(blog, null, 2), (err) =>{
+                 fs.writeFile('./data.json', JSON.stringify(blog, null, 2), (err) =>{
                      if(err){
                          console.log("Error appending new blog to JSON: ", err);
                      } else {
                          console.log("\nFile contents of file after append: ", 
-                         fs.readFileSync("../data.json", "utf8"));
+                         fs.readFileSync("./data.json", "utf8"));
                      }
                  } )
                  
@@ -65,36 +80,51 @@ class Blog {
  
      }
 
-       //First of all JSON fle cannot be completely empty, you need to make sure
-//it has atleast a pair of double curly braces "{}". Otherwise you will
-//get an error.
-
-
-       
+     static getBlogById(blogId) {
+        let blogs; 
+        try {
+            const jsonString = fs.readFileSync("./data.json", "utf8"); // remember to remove one of the dots when you link to the endpoint
         
-        // blogData.push((newBlog));
+            const blog = JSON.parse(jsonString);
+              
+            blogs = blog.posts.map((newBlog) => new Blog(newBlog)); 
+                   
+            for(let i=0;i<blogs.length;i++){
+                if(blogs[i].id === blogId) {
+                    console.log(blogs[i]);
+                    return blogs[i];
+                }
+            }
 
-        // return newBlog;
-    
+            } catch (err) {
+                console.log(err);
+            }  
+    }
+
+    static addComment(blogId, reply){ 
+        try {
+            const jsonString = fs.readFileSync("./data.json", "utf8"); //need to change this back to one dot
+        
+            const blog = JSON.parse(jsonString);
+            blog.posts[blogId-1].reply.push(reply)
+            fs.writeFile('./data.json', JSON.stringify(blog, null, 2), (err) =>{
+                if(err){
+                    console.log("Error appending new blog to JSON: ", err);
+                } else {
+                    console.log("\nFile contents of file after append: ", 
+                    fs.readFileSync("./data.json", "utf8"));
+                }
+            } )
+
+            } catch (err) {
+                console.log(err);
+            }  
+    }
+        
+       
+       
+    }
 
 
-}
-
-
-// "id":1
-// 	"title":"cars"
-// 	"post":"G Wagon is best"
-// 	"reaction":":)"
-// 	"reply":[
-// 	{
-// 		"
-// 		"rText": "I agree" //reply no.1 post
-// 		
-// 	},
-// 	{
-// 		"rId":2 //reply no.2
-// 		"rText": "Too expensive" //reply no.2's post
-// 		"rReaction": null //no reaction on reply no.2's post
-// 	}]
 
 module.exports = Blog;
