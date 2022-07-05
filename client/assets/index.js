@@ -49,7 +49,7 @@ function getTestPosts() {
 function createPost(data) {
   let postList = document.getElementById("post-list");
   let postBox = document.createElement("div");
-  postBox.setAttribute("class", "post-box");
+  postBox.setAttribute("class", "post-box")
   let title = document.createElement("h2");
   title.setAttribute("class", "post-title");
   title.innerText = data.title;
@@ -62,12 +62,13 @@ function createPost(data) {
   let reactions = createReactions(data.reactions);
   // add function to populate the reactions div
   let replies = createReplies(data.reply);
+  let replyBox = createReplyBox()
+  addReplyListeners(btnPost, replyBox)
   replies.setAttribute("class", "post-replies");
   //add function to populate the replies div
   reactions.append(btnPost);
   postBox.append(title, text, reactions);
-  postList.appendChild(postBox);
-  postList.appendChild(replies);
+  postList.append(postBox, replyBox, replies)
 }
 
 function createReactions(reactArr) {
@@ -170,6 +171,28 @@ function emoji2Func(event) {
 function emoji3Func(event) {
   submitEmoji(event, 2);
   event.currentTarget.removeEventListener("click", emoji3Func);
+}
+
+function createReplyBox(){
+  let replyDiv = document.createElement('div')
+  replyDiv.setAttribute("class", "reply-box")
+  let replyInput = document.createElement('input')
+  replyInput.setAttribute("class", "reply-input")
+  replyInput.type = 'text'
+  let submitReply = document.createElement('button')
+  submitReply.type = 'submit'
+  submitReply.innerText = "Submit"
+  submitReply.setAttribute("class", "reply-btn")
+  //button event listener
+  replyDiv.append(replyInput, submitReply)
+  replyDiv.style.display = 'none'
+  return replyDiv
+}
+
+function addReplyListeners(button, div){
+  button.addEventListener('click', () => {
+    div.style.display = 'block'
+  })
 }
 
 //event listeners
