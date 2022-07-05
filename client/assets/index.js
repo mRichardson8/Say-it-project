@@ -23,7 +23,7 @@ let testObj = [
 
 async function getPosts() {
   try {
-    let response = await fetch("http://localhost:3000/blogs");
+    let response = await fetch("https://say-it-project.herokuapp.com/blogs");
     let data = await response.json();
     console.log(data);
     for (let i = 0; i < data.length; i++) {
@@ -138,7 +138,7 @@ async function submitEmoji(e, index) {
   e.currentTarget.children[1].innerText = (
     parseInt(e.currentTarget.children[1].innerText) + 1
   ).toString();
-  let response = await fetch("localhost:3000/reactions", {
+  let response = await fetch("https://say-it-project.herokuapp.com/reactions", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -219,7 +219,7 @@ function addReplyListeners(button, div) {
 
 async function postReply(replyText, postID){
   try{
-      let response = await fetch("http://localhost:3000/replies", {
+      let response = await fetch("https://say-it-project.herokuapp.com/replies", {
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -248,7 +248,7 @@ newPostForm.addEventListener("submit", async (e) => {
   let postTitle = document.getElementById('form-title').value
   let postBody = document.getElementById("form-text").value;
   let postGif = ""; //document.getElementById('post-img').src //TODO need to add blank img into the form details
-  let response = await fetch("http://localhost:3000/blogs", {
+  let response = await fetch("https://say-it-project.herokuapp.com/blogs", {
     method: "POST",
     headers: {
       Accept: "application/json",
