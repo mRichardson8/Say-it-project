@@ -59,10 +59,12 @@ function createPost(data) {
   text.innerText = data.post;
   let reactions = createReactions(data.reactions);
   // add function to populate the reactions div
-  let replies = document.createElement("div");
+  let replies = createReplies(data.reply)
+  replies.setAttribute("class", "post-replies");
   //add function to populate the replies div
-  postBox.append(title, text, reactions, replies);
+  postBox.append(title, text, reactions);
   postList.appendChild(postBox);
+  postList.appendChild(replies)
 }
 
 function createReactions(reactArr) {
@@ -103,7 +105,11 @@ function createReactions(reactArr) {
 
 function createReplies(repliesArr) {
   let replies = document.createElement("div");
-  //TODO read from the array of replies and create a div populated with each string as a separate reply
+  repliesArr.forEach((string) => {
+    let p = document.createElement('p')
+    p.innerText = string
+    replies.appendChild(p)
+  })
   return replies;
 }
 
