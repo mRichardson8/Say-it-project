@@ -118,12 +118,23 @@ function createReplies(repliesArr) {
   return replies;
 }
 
+function appendReply(postIndex, replyText){
+  replies = document.getElementById('post-list').children[postIndex]
+  let p = document.createElement("p");
+  p.setAttribute('class', 'reply-text')
+  p.innerText = replyText;
+  replies.appendChild(p)
+}
+
 function submitPost(e) {
   return;
 }
 
 async function submitEmoji(e, index) {
   console.log("clicked", index);
+  let parent = e.currentTarget.parentNode.parentNode.parentNode
+  let child = e.currentTarget.parentNode.parentNode
+  let postID = Array.prototype.indexOf.call(parent.children, child);
   e.currentTarget.children[1].innerText = (
     parseInt(e.currentTarget.children[1].innerText) + 1
   ).toString();
@@ -133,7 +144,7 @@ async function submitEmoji(e, index) {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ index: index }),
+    body: JSON.stringify({ index: index, id: (postID+3)/3}),
   });
   if (response.status(204)) {
     //e.currentTarget.children[1].innerText = (parseInt(e.currentTarget.children[1].innerText) + 1).toString()
@@ -185,6 +196,16 @@ function createReplyBox() {
   submitReply.innerText = "Submit";
   submitReply.setAttribute("class", "reply-btn");
   //button event listener
+  submitReply.addEventListener('click', () => {
+    console.log("clicked")
+    let parent = replyDiv.parentNode
+    let child = replyDiv
+    var index = Array.prototype.indexOf.call(parent.children, child);
+    postReply(replyInput.value, (index + 2)/3)
+    replyDiv.style.display = 'none'
+    appendReply(index+1, replyInput.value)
+    replyInput.value = ''
+  })
   replyDiv.append(replyInput, submitReply);
   replyDiv.style.display = "none";
   return replyDiv;
@@ -194,6 +215,21 @@ function addReplyListeners(button, div) {
   button.addEventListener("click", () => {
     div.style.display = "flex";
   });
+}
+
+async function postReply(replyText, postID){
+  try{
+      let response = await fetch("localhost:3000/replies", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ text: replyText, id: postID}),
+      });
+  }catch(err){
+      console.log(err)
+  }
 }
 
 //event listeners
