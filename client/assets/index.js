@@ -26,7 +26,7 @@ async function getPosts() {
     let response = await fetch("http://localhost:3000/blogs");
     let data = await response.json();
     console.log(data);
-    for (let i = 0; i < data.body; i++) {
+    for (let i = 0; i < data.length; i++) {
       createPost(data[i]);
     }
     addEmojiListeners();
@@ -59,7 +59,7 @@ function createPost(data) {
   let btnPost = document.createElement("button");
   btnPost.setAttribute("class", "btn");
   btnPost.textContent = "reply";
-  let reactions = createReactions(data.reactions);
+  let reactions = createReactions(data.reaction);
   // add function to populate the reactions div
   let replies = createReplies(data.reply);
   let replyBox = createReplyBox();
@@ -219,7 +219,7 @@ function addReplyListeners(button, div) {
 
 async function postReply(replyText, postID){
   try{
-      let response = await fetch("localhost:3000/replies", {
+      let response = await fetch("http://localhost:3000/replies", {
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -245,7 +245,7 @@ gifBtn.addEventListener("click", (e) => {
 let newPostForm = document.getElementById("new-post-form");
 newPostForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  let postTitle = "title"; // document.getElementById('post-title').value //TODO need to add a text input for title in the form
+  let postTitle = document.getElementById('form-title').value
   let postBody = document.getElementById("form-text").value;
   let postGif = ""; //document.getElementById('post-img').src //TODO need to add blank img into the form details
   let response = await fetch("http://localhost:3000/blogs", {
@@ -258,7 +258,7 @@ newPostForm.addEventListener("submit", async (e) => {
       title: postTitle,
       post: postBody,
       image: postGif,
-      reaction: [],
+      reaction: [0,0,0],
       reply: [],
     }),
   });
@@ -281,4 +281,4 @@ postText.addEventListener("input", (e) => {
 });
 
 //Run the setup
-getTestPosts();
+getPosts();

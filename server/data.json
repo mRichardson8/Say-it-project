@@ -5,11 +5,16 @@
       "title": "this is my stuff",
       "post": "stuff",
       "image": "",
-      "reaction": [],
+      "reaction": [
+        0,
+        0,
+        0
+      ],
       "reply": [
         "i like your stuff",
         "your stuff sucks",
-        "i like eggs"
+        "i like eggs",
+        "new reply"
       ]
     },
     {
@@ -58,7 +63,9 @@
         0,
         0
       ],
-      "reply": []
+      "reply": [
+        "Another new reply"
+      ]
     },
     {
       "id": 6,
@@ -107,6 +114,28 @@
         0
       ],
       "reply": []
+    },
+    {
+      "id": 10,
+      "title": "title",
+      "post": "it's pretty cool",
+      "image": "",
+      "reaction": [],
+      "reply": []
+    },
+    {
+      "id": 11,
+      "title": "Final attempt",
+      "post": "This will work",
+      "image": "",
+      "reaction": [
+        0,
+        0,
+        0
+      ],
+      "reply": [
+        "This also works!"
+      ]
     }
   ]
 }
