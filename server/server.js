@@ -23,6 +23,20 @@ app.get('/blogs', (req, res) => {
     res.send(blogs);
 })
 
+app.get('/blogs/:id', (req,res) => {
+    const blogId = parseInt(req.params.id);
+    const numOfBlogs = Blog.all.length;
+    
+    if(blogId > numOfBlogs || blogId <= 0){
+        const err = "Error: This blog doesn't exist."
+        res.send(err);
+    } else {
+        const selectedBlog = Blog.getBlogById(blogId);
+        res.send(selectedBlog);
+    }
+    
+})
+
 
 app.listen(port, () => { console.log(`server running on port ${port}`)});
 

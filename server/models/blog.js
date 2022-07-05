@@ -14,7 +14,7 @@ class Blog {
     static get all(){
         let blogs; 
         try {
-            const jsonString = fs.readFileSync("./data.json", "utf8");
+            const jsonString = fs.readFileSync("../data.json", "utf8"); //need to change this back to one dot
         
             const blog = JSON.parse(jsonString);
               
@@ -27,8 +27,6 @@ class Blog {
                 console.log(err);
             }  
     }
-
-    
 
     static create(funny){
         //First of all JSON fle cannot be completely empty, you need to make sure
@@ -82,7 +80,111 @@ class Blog {
  
      }
 
-}
+     static getBlogById(blogId) {
+        let blogs; 
+        try {
+            const jsonString = fs.readFileSync("../data.json", "utf8"); // remember to remove one of the dots when you link to the endpoint
+        
+            const blog = JSON.parse(jsonString);
+              
+            blogs = blog.posts.map((newBlog) => new Blog(newBlog)); 
+                   
+            for(let i=0;i<blogs.length;i++){
+                if(blogs[i].id === blogId) {
+                    console.log(blogs[i]);
+                    return blogs[i];
+                }
+            }
+
+            } catch (err) {
+                console.log(err);
+            }  
+    }
+
+    static addComment(blogId, reply){ 
+        try {
+            const jsonString = fs.readFileSync("../data.json", "utf8"); //need to change this back to one dot
+        
+            const blog = JSON.parse(jsonString);
+            blog.posts[blogId-1].reply.push(reply)
+            fs.writeFile('../data.json', JSON.stringify(blog, null, 2), (err) =>{
+                if(err){
+                    console.log("Error appending new blog to JSON: ", err);
+                } else {
+                    console.log("\nFile contents of file after append: ", 
+                    fs.readFileSync("../data.json", "utf8"));
+                }
+            } )
+
+            } catch (err) {
+                console.log(err);
+            }  
+    }
+        
+        // const selectedBlog = Blog.getBlogById(blogId);
+        // const repliesList = selectedBlog.reply;
+        // repliesList.push(reply);
+        // console.log(selectedBlog);
+        
+        
+        
+        
+
+        // fs.writeFile('../data.json', JSON.stringify(selectedBlog, null, 2), (err) =>{
+        //     if(err){
+        //         console.log("Error adding comment to JSON: ", err);
+        //     } else {
+        //         console.log("\nFile contents of file after append: ", 
+        //         fs.readFileSync("../data.json", "utf8"));
+        //     }
+        // } )
+
+        // return selectedBlog;
+    }
+
+     
+
+
+
+// {
+//     "posts": [
+//       {
+//         "id": 1,
+//         "title": "this is my stuff",
+//         "post": "stuff",
+//         "image": "",
+//         "reaction": [],
+//         "reply": [
+//           "i like your stuff",
+//           "your stuff sucks"
+//         ]
+//       },
+//       {
+//         "id": 2,
+//         "title": "My love for chicken wings",
+//         "post": "I like chicken wings",
+//         "image": "",
+//         "reaction": [
+//           0,
+//           0,
+//           0
+//         ],
+//         "reply": []
+//       },
+//       {
+//         "id": 3,
+//         "title": "My love for chicken wings",
+//         "post": "I like chicken wings",
+//         "image": "",
+//         "reaction": [
+//           0,
+//           0,
+//           0
+//         ],
+//         "reply": []
+//       }
+//     ]
+//   }
 
 
 
