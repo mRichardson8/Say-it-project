@@ -20,7 +20,7 @@ class Blog {
               
             blogs = blog.posts.map((newBlog) => new Blog(newBlog)); 
                    
-            console.log(blogs);
+            
             return blogs;
 
             } catch (err) {
