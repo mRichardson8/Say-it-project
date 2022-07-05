@@ -233,5 +233,15 @@ newPostForm.addEventListener("submit", async (e) => {
   }
 });
 
+let postText = document.getElementById('form-text')
+postText.addEventListener('input', (e) => {
+  console.log("Tappity tap")
+  if (postText.value.length > 140){
+    postText.value = postText.value.slice(0,140)
+  }
+  let textCounter = document.getElementById('text-counter')
+  textCounter.innerText = (140 - postText.value.length).toString()
+})
+
 //Run the setup
 getTestPosts();
