@@ -49,7 +49,7 @@ function getTestPosts() {
 function createPost(data) {
   let postList = document.getElementById("post-list");
   let postBox = document.createElement("div");
-  postBox.setAttribute("class", "post-box")
+  postBox.setAttribute("class", "post-box");
   let title = document.createElement("h2");
   title.setAttribute("class", "post-title");
   title.innerText = data.title;
@@ -62,13 +62,13 @@ function createPost(data) {
   let reactions = createReactions(data.reactions);
   // add function to populate the reactions div
   let replies = createReplies(data.reply);
-  let replyBox = createReplyBox()
-  addReplyListeners(btnPost, replyBox)
+  let replyBox = createReplyBox();
+  addReplyListeners(btnPost, replyBox);
   replies.setAttribute("class", "post-replies");
   //add function to populate the replies div
   reactions.append(btnPost);
   postBox.append(title, text, reactions);
-  postList.append(postBox, replyBox, replies)
+  postList.append(postBox, replyBox, replies);
 }
 
 function createReactions(reactArr) {
@@ -111,6 +111,7 @@ function createReplies(repliesArr) {
   let replies = document.createElement("div");
   repliesArr.forEach((string) => {
     let p = document.createElement("p");
+    p.setAttribute("class", "reply-text");
     p.innerText = string;
     replies.appendChild(p);
   });
@@ -173,26 +174,26 @@ function emoji3Func(event) {
   event.currentTarget.removeEventListener("click", emoji3Func);
 }
 
-function createReplyBox(){
-  let replyDiv = document.createElement('div')
-  replyDiv.setAttribute("class", "reply-box")
-  let replyInput = document.createElement('input')
-  replyInput.setAttribute("class", "reply-input")
-  replyInput.type = 'text'
-  let submitReply = document.createElement('button')
-  submitReply.type = 'submit'
-  submitReply.innerText = "Submit"
-  submitReply.setAttribute("class", "reply-btn")
+function createReplyBox() {
+  let replyDiv = document.createElement("div");
+  replyDiv.setAttribute("class", "reply-box");
+  let replyInput = document.createElement("input");
+  replyInput.setAttribute("class", "reply-input");
+  replyInput.type = "text";
+  let submitReply = document.createElement("button");
+  submitReply.type = "submit";
+  submitReply.innerText = "Submit";
+  submitReply.setAttribute("class", "reply-btn");
   //button event listener
-  replyDiv.append(replyInput, submitReply)
-  replyDiv.style.display = 'none'
-  return replyDiv
+  replyDiv.append(replyInput, submitReply);
+  replyDiv.style.display = "none";
+  return replyDiv;
 }
 
-function addReplyListeners(button, div){
-  button.addEventListener('click', () => {
-    div.style.display = 'block'
-  })
+function addReplyListeners(button, div) {
+  button.addEventListener("click", () => {
+    div.style.display = "flex";
+  });
 }
 
 //event listeners
@@ -233,15 +234,15 @@ newPostForm.addEventListener("submit", async (e) => {
   }
 });
 
-let postText = document.getElementById('form-text')
-postText.addEventListener('input', (e) => {
-  console.log("Tappity tap")
-  if (postText.value.length > 140){
-    postText.value = postText.value.slice(0,140)
+let postText = document.getElementById("form-text");
+postText.addEventListener("input", (e) => {
+  console.log("Tappity tap");
+  if (postText.value.length > 140) {
+    postText.value = postText.value.slice(0, 140);
   }
-  let textCounter = document.getElementById('text-counter')
-  textCounter.innerText = (140 - postText.value.length).toString()
-})
+  let textCounter = document.getElementById("text-counter");
+  textCounter.innerText = (140 - postText.value.length).toString();
+});
 
 //Run the setup
 getTestPosts();

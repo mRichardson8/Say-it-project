@@ -53,17 +53,22 @@ main {
   width: 90vw;
   max-width: 1170px;
   margin: 0 auto;
+  display: grid;
+  justify-content: center;
 }
 
 /* form styles */
-#new-post-form {
+#new-post-form,
+.reply-box {
   max-width: 600px;
   padding: 0.5rem 0.75rem;
   border-radius: var(--radius);
   margin-bottom: 2rem;
   box-shadow: var(--light-shadow);
-  /* display: flex;
-  flex-direction: column; */
+}
+
+#new-post-form {
+  position: relative;
 }
 
 #form-title {
@@ -71,7 +76,8 @@ main {
 }
 
 #form-title,
-#form-text {
+#form-text,
+.reply-input {
   width: 100%;
   padding: 0.3rem 1rem;
   border: 1px solid burlywood;
@@ -81,13 +87,21 @@ main {
   word-wrap: normal;
 }
 
+#text-counter {
+  position: absolute;
+  right: 1rem;
+  top: 53%;
+  font-size: 0.9rem;
+}
+
 .btn-container {
   display: flex;
   justify-content: space-between;
   padding: 0.5rem 1rem;
 }
 
-.btn {
+.btn,
+.reply-btn {
   display: block;
   border: none;
   padding: 0.5rem 1.5rem;
@@ -96,13 +110,21 @@ main {
   background-color: burlywood;
   cursor: pointer;
   font-weight: bold;
+  transition: var(--transition);
+}
+
+.btn:hover,
+.reply-btn:hover {
+  color: #fff;
+  background-color: #654321;
 }
 
 /* Post List styles */
-.post-box {
+.post-box,
+.post-replies {
   max-width: 600px;
   padding: 1rem;
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.3rem;
   box-shadow: var(--light-shadow);
 }
 
@@ -145,5 +167,46 @@ main {
 }
 
 .post-box button.btn {
+  padding: 0.4rem 0.8rem;
   margin-left: auto;
+  transition: var(--transition);
+}
+
+.post-box button.btn:hover {
+  color: #fff;
+  background-color: #654321;
+}
+
+/*  Replies input box */
+
+.reply-box {
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  height: 4rem;
+}
+
+.reply-input {
+  width: 80%;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.reply-btn {
+  padding: 0.4rem 0.8rem;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+/* Replies */
+
+.post-replies {
+  max-width: 480px;
+  margin-bottom: 2rem;
+  margin-left: auto;
+}
+
+.reply-text {
+  font-size: 0.9rem;
+  color: blue;
 }
