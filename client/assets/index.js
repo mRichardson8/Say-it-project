@@ -25,15 +25,14 @@ async function getPosts() {
   try {
     let response = await fetch("http://localhost:3000/blogs");
     let data = await response.json();
-    console.log(data)
+    console.log(data);
     for (let i = 0; i < data.body; i++) {
       createPost(data[i]);
     }
-    addEmojiListeners()
+    addEmojiListeners();
   } catch (err) {
     console.log(err);
   }
-
 }
 
 //! For testing createPost before server implementation
@@ -42,7 +41,7 @@ function getTestPosts() {
   for (let i = 0; i < data.length; i++) {
     createPost(data[i]);
   }
-  addEmojiListeners()
+  addEmojiListeners();
 }
 
 //! This function takes in an individual post and renders the post, the reactions and the comments as HTML
@@ -57,14 +56,18 @@ function createPost(data) {
   let text = document.createElement("p");
   text.setAttribute("class", "post-text");
   text.innerText = data.post;
+  let btnPost = document.createElement("button");
+  btnPost.setAttribute("class", "btn");
+  btnPost.textContent = "reply";
   let reactions = createReactions(data.reactions);
   // add function to populate the reactions div
-  let replies = createReplies(data.reply)
+  let replies = createReplies(data.reply);
   replies.setAttribute("class", "post-replies");
   //add function to populate the replies div
+  reactions.append(btnPost);
   postBox.append(title, text, reactions);
   postList.appendChild(postBox);
-  postList.appendChild(replies)
+  postList.appendChild(replies);
 }
 
 function createReactions(reactArr) {
@@ -106,10 +109,10 @@ function createReactions(reactArr) {
 function createReplies(repliesArr) {
   let replies = document.createElement("div");
   repliesArr.forEach((string) => {
-    let p = document.createElement('p')
-    p.innerText = string
-    replies.appendChild(p)
-  })
+    let p = document.createElement("p");
+    p.innerText = string;
+    replies.appendChild(p);
+  });
   return replies;
 }
 
@@ -117,51 +120,57 @@ function submitPost(e) {
   return;
 }
 
-async function submitEmoji(e, index){
-  console.log("clicked", index)
-  e.currentTarget.children[1].innerText = (parseInt(e.currentTarget.children[1].innerText) + 1).toString()
-  let response = await fetch('localhost:3000/reactions', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({index: index})
-  })
-  if (response.status(204)){ 
+async function submitEmoji(e, index) {
+  console.log("clicked", index);
+  e.currentTarget.children[1].innerText = (
+    parseInt(e.currentTarget.children[1].innerText) + 1
+  ).toString();
+  let response = await fetch("localhost:3000/reactions", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ index: index }),
+  });
+  if (response.status(204)) {
     //e.currentTarget.children[1].innerText = (parseInt(e.currentTarget.children[1].innerText) + 1).toString()
-  } else{
-      console.log("Huge error")
-      console.log(response.body)
+  } else {
+    console.log("Huge error");
+    console.log(response.body);
   }
 }
 
-
-function addEmojiListeners(){
-  document.querySelectorAll('.post-box div div:nth-child(1)').forEach((emoji) => {
-      emoji.addEventListener('click', emoji1Func)
-  })
-  document.querySelectorAll('.post-box div div:nth-child(2)').forEach((emoji) => {
-      emoji.addEventListener('click', emoji2Func)
-  })
-  document.querySelectorAll('.post-box div div:nth-child(3)').forEach((emoji) => {
-      emoji.addEventListener('click', emoji3Func)
-  })
+function addEmojiListeners() {
+  document
+    .querySelectorAll(".post-box div div:nth-child(1)")
+    .forEach((emoji) => {
+      emoji.addEventListener("click", emoji1Func);
+    });
+  document
+    .querySelectorAll(".post-box div div:nth-child(2)")
+    .forEach((emoji) => {
+      emoji.addEventListener("click", emoji2Func);
+    });
+  document
+    .querySelectorAll(".post-box div div:nth-child(3)")
+    .forEach((emoji) => {
+      emoji.addEventListener("click", emoji3Func);
+    });
 }
 
-function emoji1Func(event){
-  submitEmoji(event, 0)
-  event.currentTarget.removeEventListener('click', emoji1Func)
+function emoji1Func(event) {
+  submitEmoji(event, 0);
+  event.currentTarget.removeEventListener("click", emoji1Func);
 }
-function emoji2Func(event){
-  submitEmoji(event, 1)
-  event.currentTarget.removeEventListener('click', emoji2Func)
+function emoji2Func(event) {
+  submitEmoji(event, 1);
+  event.currentTarget.removeEventListener("click", emoji2Func);
 }
-function emoji3Func(event){
-  submitEmoji(event, 2)
-  event.currentTarget.removeEventListener('click', emoji3Func)
+function emoji3Func(event) {
+  submitEmoji(event, 2);
+  event.currentTarget.removeEventListener("click", emoji3Func);
 }
-
 
 //event listeners
 
@@ -185,7 +194,13 @@ newPostForm.addEventListener("submit", async (e) => {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ title: postTitle, post: postBody, image: postGif, reaction: [], reply: [] }),
+    body: JSON.stringify({
+      title: postTitle,
+      post: postBody,
+      image: postGif,
+      reaction: [],
+      reply: [],
+    }),
   });
   if (response.status(204)) {
     location.reload();
