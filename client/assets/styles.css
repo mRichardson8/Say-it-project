@@ -88,6 +88,7 @@ main {
 }
 
 .btn {
+  display: block;
   border: none;
   padding: 0.5rem 1.5rem;
   border-radius: var(--radius);
@@ -141,4 +142,8 @@ main {
 
 .emoji-count {
   font-size: 0.8rem;
+}
+
+.post-box button.btn {
+  margin-left: auto;
 }
