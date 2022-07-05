@@ -1,4 +1,3 @@
-const blogData = require('../data');
 const fs = require("fs");
 
 class Blog {
@@ -13,15 +12,33 @@ class Blog {
     }
 
     static get all(){
-        const blogs = blogData.map((blog) => new Blog(blog));
-        return blogs; //might need to change this when we start reading and writing from the JSON file but for now this is fine
+        let blogs; 
+        try {
+            const jsonString = fs.readFileSync("./data.json", "utf8");
+        
+            const blog = JSON.parse(jsonString);
+              
+            blogs = blog.posts.map((newBlog) => new Blog(newBlog)); 
+                   
+            console.log(blogs);
+            return blogs;
+
+            } catch (err) {
+                console.log(err);
+            }  
     }
 
+    
+
     static create(funny){
+        //First of all JSON fle cannot be completely empty, you need to make sure
+        //it has atleast a pair of double curly braces "{}". Otherwise you will
+        //get an error.
+
         //first we need to read the json file to see if there are any blogs
         fs.readFile("../data.json", "utf8", (err, jsonString) => {
          if(err) {
-             console.log("Error reading file from disk", err);
+             console.log("Error reading file from data.json: ", err);
              return
          }
          try {
@@ -65,36 +82,8 @@ class Blog {
  
      }
 
-       //First of all JSON fle cannot be completely empty, you need to make sure
-//it has atleast a pair of double curly braces "{}". Otherwise you will
-//get an error.
-
-
-       
-        
-        // blogData.push((newBlog));
-
-        // return newBlog;
-    
-
-
 }
 
 
-// "id":1
-// 	"title":"cars"
-// 	"post":"G Wagon is best"
-// 	"reaction":":)"
-// 	"reply":[
-// 	{
-// 		"
-// 		"rText": "I agree" //reply no.1 post
-// 		
-// 	},
-// 	{
-// 		"rId":2 //reply no.2
-// 		"rText": "Too expensive" //reply no.2's post
-// 		"rReaction": null //no reaction on reply no.2's post
-// 	}]
 
 module.exports = Blog;
