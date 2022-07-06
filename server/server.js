@@ -3,6 +3,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 const Blog = require('./models/blog');
+require("dotenv").config();
+const axios = require('axios');
 
 
 const app = express();
@@ -62,6 +64,26 @@ app.post('/replies', (req,res) => {
     } else {
         Blog.addComment(blogId,reply);
         res.send({message: 'Reply successfully sent.'})
+    }
+})
+
+app.get('/gifs', async (req,res)=> {            //trending GIFS
+    console.log(process.env.GIF_API_KEY);
+    try{
+        const result = await axios.get(`https://api.giphy.com/v1/gifs/trending?api_key=${process.env.GIF_API_KEY}`);
+        res.send(result.data);
+    } catch(err) {
+        res.send(err);
+    }
+    
+})
+
+app.get('/gifs/:search', async (req,res) => {
+    try{
+        const result = await axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIF_API_KEY}&q=${req.params.search}`);
+        res.send(result.data);
+    } catch(err) {
+        res.send(err);
     }
 })
 
