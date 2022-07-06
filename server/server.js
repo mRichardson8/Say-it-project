@@ -37,6 +37,20 @@ app.get('/blogs/:id', (req,res) => {
     
 })
 
+app.post('/reactions', (req, res) => {
+    const blogId = parseInt(req.body.id);
+    const index = req.body.index;
+    const numOfBlogs = Blog.all.length;
+    if(blogId > numOfBlogs || blogId <= 0){
+        const err = "Error: This blog doesn't exist."
+        res.send(err);
+    }  else {
+        Blog.addReaction(blogId,index);
+        res.send({message: 'Reaction successfully sent.'})
+    }
+
+})
+
 app.post('/replies', (req,res) => {
     const blogId = parseInt(req.body.id);
     const reply = req.body.text;
