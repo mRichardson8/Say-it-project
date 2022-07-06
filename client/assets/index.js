@@ -118,12 +118,12 @@ function createReplies(repliesArr) {
   return replies;
 }
 
-function appendReply(postIndex, replyText){
-  replies = document.getElementById('post-list').children[postIndex]
+function appendReply(postIndex, replyText) {
+  replies = document.getElementById("post-list").children[postIndex];
   let p = document.createElement("p");
-  p.setAttribute('class', 'reply-text')
+  p.setAttribute("class", "reply-text");
   p.innerText = replyText;
-  replies.appendChild(p)
+  replies.appendChild(p);
 }
 
 function submitPost(e) {
@@ -132,8 +132,8 @@ function submitPost(e) {
 
 async function submitEmoji(e, index) {
   console.log("clicked", index);
-  let parent = e.currentTarget.parentNode.parentNode.parentNode
-  let child = e.currentTarget.parentNode.parentNode
+  let parent = e.currentTarget.parentNode.parentNode.parentNode;
+  let child = e.currentTarget.parentNode.parentNode;
   let postID = Array.prototype.indexOf.call(parent.children, child);
   e.currentTarget.children[1].innerText = (
     parseInt(e.currentTarget.children[1].innerText) + 1
@@ -144,7 +144,7 @@ async function submitEmoji(e, index) {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ index: index, id: (postID+3)/3}),
+    body: JSON.stringify({ index: index, id: (postID + 3) / 3 }),
   });
   if (response.status(204)) {
     //e.currentTarget.children[1].innerText = (parseInt(e.currentTarget.children[1].innerText) + 1).toString()
@@ -196,16 +196,16 @@ function createReplyBox() {
   submitReply.innerText = "Submit";
   submitReply.setAttribute("class", "reply-btn");
   //button event listener
-  submitReply.addEventListener('click', () => {
-    console.log("clicked")
-    let parent = replyDiv.parentNode
-    let child = replyDiv
+  submitReply.addEventListener("click", () => {
+    console.log("clicked");
+    let parent = replyDiv.parentNode;
+    let child = replyDiv;
     var index = Array.prototype.indexOf.call(parent.children, child);
-    postReply(replyInput.value, (index + 2)/3)
-    replyDiv.style.display = 'none'
-    appendReply(index+1, replyInput.value)
-    replyInput.value = ''
-  })
+    postReply(replyInput.value, (index + 2) / 3);
+    replyDiv.style.display = "none";
+    appendReply(index + 1, replyInput.value);
+    replyInput.value = "";
+  });
   replyDiv.append(replyInput, submitReply);
   replyDiv.style.display = "none";
   return replyDiv;
@@ -217,46 +217,61 @@ function addReplyListeners(button, div) {
   });
 }
 
-async function postReply(replyText, postID){
-  try{
-      let response = await fetch("https://say-it-project.herokuapp.com/replies", {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ text: replyText, id: postID}),
-      });
-  }catch(err){
-      console.log(err)
+async function postReply(replyText, postID) {
+  try {
+    let response = await fetch("https://say-it-project.herokuapp.com/replies", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text: replyText, id: postID }),
+    });
+  } catch (err) {
+    console.log(err);
   }
 }
 
 //event listeners
 
 // add a new div to handle the gif keyboard, this dif starts with display set to none but when button is clicked it becomes flex
-let gifBtn = document.getElementById("gif-btn");
+const gifBtn = document.getElementById("gif-btn");
+const gifDiv = document.createElement("div");
+const gifCloseBtn = document.createElement("button");
+
 gifBtn.addEventListener("click", (e) => {
-  let gifDiv = document.createElement("div");
-  gifDiv.setAttribute('class', 'gif-box')
-  let gifSearch = document.createElement('input')
-  gifSearch.type = 'search';
-  gifSearch.placeholder = 'Enter a search term'
-  let gifSearchBtn = document.createElement('button')
-  gifSearchBtn.textContent = 'Search'
-  let gifCloseBtn = document.createElement('button')
-  gifCloseBtn.textContent = 'Close'
+  gifDiv.setAttribute("class", "gif-box");
+  let inputWrapper = document.createElement("div");
+  inputWrapper.setAttribute("class", "input-wrapper");
+  let gifSearch = document.createElement("input");
+  let gifBtnContainer = document.createElement("div");
+  gifBtnContainer.setAttribute("class", "gif-btn-container");
+  gifSearch.type = "search";
+  gifSearch.placeholder = "Enter a search term";
+  gifSearch.setAttribute("class", "gif-input");
+  inputWrapper.append(gifSearch, gifBtnContainer);
+  let gifSearchBtn = document.createElement("button");
+  gifSearchBtn.type = "button";
+  gifSearchBtn.textContent = "Search";
+  gifCloseBtn.textContent = "Close";
+  gifCloseBtn.type = "button";
+  gifBtnContainer.append(gifSearchBtn, gifCloseBtn);
   let imgDiv = document.createElement("div");
-  gifDiv.setAttribute('class', 'image-box')
-  gifDiv.append(gifSearch, gifSearchBtn, gifCloseBtn, imgDiv)
-  document.getElementById('new-post-form').appendChild(gifDiv)  
+  imgDiv.setAttribute("class", "image-box");
+  gifDiv.append(inputWrapper, imgDiv);
+
+  document.getElementById("new-post-form").appendChild(gifDiv);
+});
+
+gifCloseBtn.addEventListener("click", () => {
+  gifDiv.style.visibility = "hidden";
 });
 
 //details from new blog post are sent as a post request to the server. If successful the page reloads
 let newPostForm = document.getElementById("new-post-form");
 newPostForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  let postTitle = document.getElementById('form-title').value;
+  let postTitle = document.getElementById("form-title").value;
   let postBody = document.getElementById("form-text").value;
   let postGif = ""; //document.getElementById('post-img').src //TODO need to add blank img into the form details
   let response = await fetch("https://say-it-project.herokuapp.com/blogs", {
@@ -269,7 +284,7 @@ newPostForm.addEventListener("submit", async (e) => {
       title: postTitle,
       post: postBody,
       image: postGif,
-      reaction: [0,0,0],
+      reaction: [0, 0, 0],
       reply: [],
     }),
   });
