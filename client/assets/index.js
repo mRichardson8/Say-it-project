@@ -23,10 +23,10 @@ let testObj = [
 
 async function getPosts() {
   try {
-    let response = await fetch("http://localhost:3000/blogs");
+    let response = await fetch("https://say-it-project.herokuapp.com/blogs");
     let data = await response.json();
     console.log(data);
-    for (let i = 0; i < data.body; i++) {
+    for (let i = 0; i < data.length; i++) {
       createPost(data[i]);
     }
     addEmojiListeners();
@@ -59,7 +59,7 @@ function createPost(data) {
   let btnPost = document.createElement("button");
   btnPost.setAttribute("class", "btn");
   btnPost.textContent = "reply";
-  let reactions = createReactions(data.reactions);
+  let reactions = createReactions(data.reaction);
   // add function to populate the reactions div
   let replies = createReplies(data.reply);
   let replyBox = createReplyBox();
@@ -138,7 +138,7 @@ async function submitEmoji(e, index) {
   e.currentTarget.children[1].innerText = (
     parseInt(e.currentTarget.children[1].innerText) + 1
   ).toString();
-  let response = await fetch("localhost:3000/reactions", {
+  let response = await fetch("https://say-it-project.herokuapp.com/reactions", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -219,7 +219,7 @@ function addReplyListeners(button, div) {
 
 async function postReply(replyText, postID){
   try{
-      let response = await fetch("localhost:3000/replies", {
+      let response = await fetch("https://say-it-project.herokuapp.com/replies", {
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -237,18 +237,29 @@ async function postReply(replyText, postID){
 // add a new div to handle the gif keyboard, this dif starts with display set to none but when button is clicked it becomes flex
 let gifBtn = document.getElementById("gif-btn");
 gifBtn.addEventListener("click", (e) => {
-  let gifDiv = document.getElementById("gif-cont");
-  gifDiv.style.display = "flex";
+  let gifDiv = document.createElement("div");
+  gifDiv.setAttribute('class', 'gif-box')
+  let gifSearch = document.createElement('input')
+  gifSearch.type = 'search';
+  gifSearch.placeholder = 'Enter a search term'
+  let gifSearchBtn = document.createElement('button')
+  gifSearchBtn.textContent = 'Search'
+  let gifCloseBtn = document.createElement('button')
+  gifCloseBtn.textContent = 'Close'
+  let imgDiv = document.createElement("div");
+  gifDiv.setAttribute('class', 'image-box')
+  gifDiv.append(gifSearch, gifSearchBtn, gifCloseBtn, imgDiv)
+  document.getElementById('new-post-form').appendChild(gifDiv)  
 });
 
 //details from new blog post are sent as a post request to the server. If successful the page reloads
 let newPostForm = document.getElementById("new-post-form");
 newPostForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  let postTitle = "title"; // document.getElementById('post-title').value //TODO need to add a text input for title in the form
+  let postTitle = document.getElementById('form-title').value;
   let postBody = document.getElementById("form-text").value;
   let postGif = ""; //document.getElementById('post-img').src //TODO need to add blank img into the form details
-  let response = await fetch("http://localhost:3000/blogs", {
+  let response = await fetch("https://say-it-project.herokuapp.com/blogs", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -258,7 +269,7 @@ newPostForm.addEventListener("submit", async (e) => {
       title: postTitle,
       post: postBody,
       image: postGif,
-      reaction: [],
+      reaction: [0,0,0],
       reply: [],
     }),
   });
@@ -281,4 +292,4 @@ postText.addEventListener("input", (e) => {
 });
 
 //Run the setup
-getTestPosts();
+getPosts();

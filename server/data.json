@@ -1,13 +1,140 @@
 {
   "posts": [
     {
+      "id": 1,
       "title": "this is my stuff",
       "post": "stuff",
       "image": "",
-      "reaction": [],
+      "reaction": [
+        0,
+        0,
+        0
+      ],
       "reply": [
         "i like your stuff",
-        "your stuff sucks"
+        "your stuff sucks",
+        "i like eggs",
+        "new reply"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "My love for chicken wings",
+      "post": "I like chicken wings",
+      "image": "",
+      "reaction": [
+        0,
+        0,
+        0
+      ],
+      "reply": []
+    },
+    {
+      "id": 3,
+      "title": "My love for chicken wings",
+      "post": "I like chicken wings",
+      "image": "",
+      "reaction": [
+        0,
+        0,
+        0
+      ],
+      "reply": []
+    },
+    {
+      "id": 4,
+      "title": "dummy post",
+      "post": "Hello this is my blog post post",
+      "image": "",
+      "reaction": [
+        0,
+        0,
+        0
+      ],
+      "reply": []
+    },
+    {
+      "id": 5,
+      "title": "dummy post",
+      "post": "Hello this is my blog post post",
+      "image": "",
+      "reaction": [
+        0,
+        0,
+        0
+      ],
+      "reply": [
+        "Another new reply"
+      ]
+    },
+    {
+      "id": 6,
+      "title": "dummy post",
+      "post": "Hello this is my blog post post",
+      "image": "",
+      "reaction": [
+        0,
+        0,
+        0
+      ],
+      "reply": []
+    },
+    {
+      "id": 7,
+      "title": "dummy post",
+      "post": "Hello this is my blog post post",
+      "image": "",
+      "reaction": [
+        0,
+        0,
+        0
+      ],
+      "reply": []
+    },
+    {
+      "id": 8,
+      "title": "dummy post",
+      "post": "Hello this is my blog post post the latest",
+      "image": "",
+      "reaction": [
+        0,
+        0,
+        0
+      ],
+      "reply": []
+    },
+    {
+      "id": 9,
+      "title": "dummy post",
+      "post": "Hello this is my blog post post the latestx2",
+      "image": "",
+      "reaction": [
+        0,
+        0,
+        0
+      ],
+      "reply": []
+    },
+    {
+      "id": 10,
+      "title": "title",
+      "post": "it's pretty cool",
+      "image": "",
+      "reaction": [],
+      "reply": []
+    },
+    {
+      "id": 11,
+      "title": "Final attempt",
+      "post": "This will work",
+      "image": "",
+      "reaction": [
+        0,
+        0,
+        0
+      ],
+      "reply": [
+        "This also works!"
       ]
     }
   ]
