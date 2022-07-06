@@ -44,42 +44,42 @@ function getTestPosts() {
   addEmojiListeners();
 }
 
-async function getTrendingGifs(){
-  try{
+async function getTrendingGifs() {
+  try {
     let response = await fetch("https://say-it-project.herokuapp.com/gifs");
-    let data = await response.json()
-    console.log(data)
-    createGifs(data.data)
-  }catch(err){
-    console.log("error fetching trending gifs")
+    let data = await response.json();
+    console.log(data);
+    createGifs(data.data);
+  } catch (err) {
+    console.log("error fetching trending gifs");
   }
 }
 
-
-async function getSearchGifs(){
-  try{
-    let searchTerm = document.querySelector('.gif-box input').value
-    let response = await fetch(`https://say-it-project.herokuapp.com/gifs/${searchTerm}`);
-    let data = await response.json()
-    createGifs(data.data)
-  } catch(err){
-    console.log("error fetching search endpoint gifs")
+async function getSearchGifs() {
+  try {
+    let searchTerm = document.querySelector(".gif-box input").value;
+    let response = await fetch(
+      `https://say-it-project.herokuapp.com/gifs/${searchTerm}`
+    );
+    let data = await response.json();
+    createGifs(data.data);
+  } catch (err) {
+    console.log("error fetching search endpoint gifs");
   }
 }
 
-
-function createGifs(gifData){
-  console.log("inside createGifs func")
-  let imageBox = document.querySelector('.image-box')
-  imageBox.textContent = ''
+function createGifs(gifData) {
+  console.log("inside createGifs func");
+  let imageBox = document.querySelector(".image-box");
+  imageBox.textContent = "";
   for (let i = 0; i < gifData.length; i++) {
-    let img = document.createElement('img')
-    img.src = gifData[i].images.downsized.url
-    img.addEventListener('click', () => {
-      let postImage = document.querySelector('#form-img')
-      postImage.src = img.src
-    })
-    imageBox.appendChild(img)
+    let img = document.createElement("img");
+    img.src = gifData[i].images.downsized.url;
+    img.addEventListener("click", () => {
+      let postImage = document.querySelector("#form-img");
+      postImage.src = img.src;
+    });
+    imageBox.appendChild(img);
   }
 }
 //! This function takes in an individual post and renders the post, the reactions and the comments as HTML
@@ -91,8 +91,8 @@ function createPost(data) {
   title.setAttribute("class", "post-title");
   title.innerText = data.title;
   let text = document.createElement("p");
-  let image = document.createElement('img')
-  image.src = data.image
+  let image = document.createElement("img");
+  image.src = data.image;
   image.setAttribute("class", "post-image");
   text.setAttribute("class", "post-text");
   text.innerText = data.post;
@@ -149,6 +149,9 @@ function createReactions(reactArr) {
 
 function createReplies(repliesArr) {
   let replies = document.createElement("div");
+  if (repliesArr.length == 0){
+    replies.style.visibility = 'hidden'
+  }
   repliesArr.forEach((string) => {
     let p = document.createElement("p");
     p.setAttribute("class", "reply-text");
@@ -160,6 +163,7 @@ function createReplies(repliesArr) {
 
 function appendReply(postIndex, replyText) {
   replies = document.getElementById("post-list").children[postIndex];
+  replies.style.visibility = 'visible'
   let p = document.createElement("p");
   p.setAttribute("class", "reply-text");
   p.innerText = replyText;
@@ -231,6 +235,7 @@ function createReplyBox() {
   let replyInput = document.createElement("input");
   replyInput.setAttribute("class", "reply-input");
   replyInput.type = "text";
+  replyInput.maxLength = 140;
   let submitReply = document.createElement("button");
   submitReply.type = "submit";
   submitReply.innerText = "Submit";
@@ -272,14 +277,7 @@ async function postReply(replyText, postID) {
   }
 }
 
-//event listeners
-
-// add a new div to handle the gif keyboard, this dif starts with display set to none but when button is clicked it becomes flex
-const gifBtn = document.getElementById("gif-btn");
-const gifDiv = document.createElement("div");
-const gifCloseBtn = document.createElement("button");
-
-gifBtn.addEventListener("click", (e) => {
+function createGifBox(){
   gifDiv.setAttribute("class", "gif-box");
   let inputWrapper = document.createElement("div");
   inputWrapper.setAttribute("class", "input-wrapper");
@@ -300,14 +298,31 @@ gifBtn.addEventListener("click", (e) => {
   let imgDiv = document.createElement("div");
   imgDiv.setAttribute("class", "image-box");
   gifDiv.append(inputWrapper, imgDiv);
-
   document.getElementById("new-post-form").appendChild(gifDiv);
   console.log("function called")
+  gifDiv.style.display = 'none'
   getTrendingGifs()
-});
+}
+
+//event listeners
+
+// add a new div to handle the gif keyboard, this dif starts with display set to none but when button is clicked it becomes flex
+  const gifBtn = document.getElementById("gif-btn");
+  const gifDiv = document.createElement("div");
+  const gifCloseBtn = document.createElement("button");
+  createGifBox()
+  
+  gifBtn.addEventListener("click", (e) => {
+    if (gifDiv.style.display == "none"){
+      gifDiv.style.display = "block";
+    } else{
+      gifDiv.style.display = "none";
+    }
+    
+  });
 
 gifCloseBtn.addEventListener("click", () => {
-  gifDiv.style.visibility = "hidden";
+  gifDiv.style.display = "none";
 });
 
 //details from new blog post are sent as a post request to the server. If successful the page reloads
@@ -316,7 +331,7 @@ newPostForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   let postTitle = document.getElementById("form-title").value;
   let postBody = document.getElementById("form-text").value;
-  let postGif = document.getElementById('form-img').src
+  let postGif = document.getElementById("form-img").src;
   let response = await fetch("https://say-it-project.herokuapp.com/blogs", {
     method: "POST",
     headers: {
@@ -332,17 +347,15 @@ newPostForm.addEventListener("submit", async (e) => {
     }),
   });
   location.reload();
-  
 });
 
 let postText = document.getElementById("form-text");
 postText.addEventListener("input", (e) => {
-  console.log("Tappity tap");
   if (postText.value.length > 140) {
     postText.value = postText.value.slice(0, 140);
   }
   let textCounter = document.getElementById("text-counter");
-  textCounter.innerText = (140 - postText.value.length).toString();
+  textCounter.innerText = `${(140 - postText.value.length)} characters remaining`.toString();
 });
 
 //Run the setup

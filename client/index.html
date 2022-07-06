@@ -7,9 +7,10 @@
     <title>Say it!</title>
     <link rel="stylesheet" href="./assets/styles.css" />
     <script defer src="assets/index.js"></script>
+    <link rel="icon" type="image/x-icon" href="./assets/megaphone.png">
   </head>
   <body>
-    <header><h1>Say it!</h1></header>
+    <header><h1>SAY IT!</h1></header>
     <main>
       <form action="" id="new-post-form">
         <input
@@ -18,13 +19,15 @@
           id="form-title"
           placeholder="Title your post"
         />
-        <img id="form-img" src="">
-        <textarea
-          name="form-text"
-          id="form-text"
-          placeholder="Start typing your very own post!"
-        ></textarea>
-        <p id="text-counter">140</p>
+        <img id="form-img" src="" />
+        <div class="textarea-wrapper">
+          <textarea
+            name="form-text"
+            id="form-text"
+            placeholder="Start typing your very own post!"
+          ></textarea>
+          <p id="text-counter">140 characters remaining</p>
+        </div>
         <div class="btn-container">
           <button type="button" class="btn" id="gif-btn">GIF</button>
           <button class="btn" id="submit-btn" type="submit">Post</button>
