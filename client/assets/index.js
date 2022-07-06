@@ -235,6 +235,7 @@ function createReplyBox() {
   let replyInput = document.createElement("input");
   replyInput.setAttribute("class", "reply-input");
   replyInput.type = "text";
+  replyInput.maxLength = 140;
   let submitReply = document.createElement("button");
   submitReply.type = "submit";
   submitReply.innerText = "Submit";

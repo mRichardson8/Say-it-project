@@ -214,6 +214,8 @@ main {
   max-width: 480px;
   margin-bottom: 2rem;
   margin-left: auto;
+  overflow-wrap:break-word;
+
 }
 
 .reply-text {
@@ -222,7 +224,9 @@ main {
   border-radius: var(--radius);
   padding: 0.5rem;
   margin-bottom: 0.5rem;
+  
   color: blue;
+  
 }
 
 .reply-text:nth-child(even) {
