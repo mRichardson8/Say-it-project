@@ -44,8 +44,40 @@ function getTestPosts() {
   addEmojiListeners();
 }
 
-//! This function takes in an individual post and renders the post, the reactions and the comments as HTML
+async function getTrendingGifs(){
+  try{
+    let response = await fetch("https://say-it-project.herokuapp.com/gifs");
+    let data = await response.json()
+    console.log(data)
+    createGifs(data.data)
+  }catch(err){
+    console.log("error fetching trending gifs")
+  }
+}
 
+
+async function getSearchGifs(){
+  try{
+    let searchTerm = document.querySelector('.gif-box input').value
+    let response = await fetch(`https://say-it-project.herokuapp.com/gif/${searchTerm}`);
+    let data = await response.json()
+    createGifs(response)
+  } catch(err){
+    console.log("error fetching search endpoint gifs")
+  }
+}
+
+
+function createGifs(gifData){
+  console.log("inside createGifs func")
+  let imageBox = document.querySelector('.image-box')
+  for (let i = 0; i < gifData.length; i++) {
+    let img = document.createElement('img')
+    img.src = gifData[i].images.downsized.url
+    imageBox.appendChild(img)
+  }
+}
+//! This function takes in an individual post and renders the post, the reactions and the comments as HTML
 function createPost(data) {
   let postList = document.getElementById("post-list");
   let postBox = document.createElement("div");
@@ -253,6 +285,7 @@ gifBtn.addEventListener("click", (e) => {
   let gifSearchBtn = document.createElement("button");
   gifSearchBtn.type = "button";
   gifSearchBtn.textContent = "Search";
+  gifSearchBtn.addEventListener('click', getSearchGifs)
   gifCloseBtn.textContent = "Close";
   gifCloseBtn.type = "button";
   gifBtnContainer.append(gifSearchBtn, gifCloseBtn);
@@ -261,6 +294,8 @@ gifBtn.addEventListener("click", (e) => {
   gifDiv.append(inputWrapper, imgDiv);
 
   document.getElementById("new-post-form").appendChild(gifDiv);
+  console.log("function called")
+  getTrendingGifs()
 });
 
 gifCloseBtn.addEventListener("click", () => {
