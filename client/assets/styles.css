@@ -77,7 +77,8 @@ main {
 
 #form-title,
 #form-text,
-.reply-input {
+.reply-input,
+.gif-input {
   width: 100%;
   padding: 0.3rem 1rem;
   border: 1px solid burlywood;
@@ -101,7 +102,8 @@ main {
 }
 
 .btn,
-.reply-btn {
+.reply-btn,
+.gif-box button {
   display: block;
   border: none;
   padding: 0.5rem 1.5rem;
@@ -210,3 +212,45 @@ main {
   font-size: 0.9rem;
   color: blue;
 }
+
+/* Gift Box */
+
+.gif-box {
+  width: 400px;
+  height: 12rem;
+  background-color: aliceblue;
+  border-radius: 1rem;
+  padding: 1rem 0.75rem;
+  position: absolute;
+  top: 9rem;
+  left: -0.2rem;
+  overflow-y: scroll;
+  visibility: visible;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.gif-input {
+  width: 100%;
+  margin-right: 0.75rem;
+}
+
+.gif-btn-container {
+  display: flex;
+  align-items: center;
+}
+
+.gif-box button {
+  padding: 0.45rem 0.5rem;
+  margin-right: 0.75rem;
+  font-size: 0.7rem;
+}
+
+/* .image-box {
+  background-color: #654321;
+ 
+} */
