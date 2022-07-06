@@ -44,42 +44,42 @@ function getTestPosts() {
   addEmojiListeners();
 }
 
-async function getTrendingGifs(){
-  try{
+async function getTrendingGifs() {
+  try {
     let response = await fetch("https://say-it-project.herokuapp.com/gifs");
-    let data = await response.json()
-    console.log(data)
-    createGifs(data.data)
-  }catch(err){
-    console.log("error fetching trending gifs")
+    let data = await response.json();
+    console.log(data);
+    createGifs(data.data);
+  } catch (err) {
+    console.log("error fetching trending gifs");
   }
 }
 
-
-async function getSearchGifs(){
-  try{
-    let searchTerm = document.querySelector('.gif-box input').value
-    let response = await fetch(`https://say-it-project.herokuapp.com/gifs/${searchTerm}`);
-    let data = await response.json()
-    createGifs(data.data)
-  } catch(err){
-    console.log("error fetching search endpoint gifs")
+async function getSearchGifs() {
+  try {
+    let searchTerm = document.querySelector(".gif-box input").value;
+    let response = await fetch(
+      `https://say-it-project.herokuapp.com/gifs/${searchTerm}`
+    );
+    let data = await response.json();
+    createGifs(data.data);
+  } catch (err) {
+    console.log("error fetching search endpoint gifs");
   }
 }
 
-
-function createGifs(gifData){
-  console.log("inside createGifs func")
-  let imageBox = document.querySelector('.image-box')
-  imageBox.textContent = ''
+function createGifs(gifData) {
+  console.log("inside createGifs func");
+  let imageBox = document.querySelector(".image-box");
+  imageBox.textContent = "";
   for (let i = 0; i < gifData.length; i++) {
-    let img = document.createElement('img')
-    img.src = gifData[i].images.downsized.url
-    img.addEventListener('click', () => {
-      let postImage = document.querySelector('#form-img')
-      postImage.src = img.src
-    })
-    imageBox.appendChild(img)
+    let img = document.createElement("img");
+    img.src = gifData[i].images.downsized.url;
+    img.addEventListener("click", () => {
+      let postImage = document.querySelector("#form-img");
+      postImage.src = img.src;
+    });
+    imageBox.appendChild(img);
   }
 }
 //! This function takes in an individual post and renders the post, the reactions and the comments as HTML
@@ -91,8 +91,8 @@ function createPost(data) {
   title.setAttribute("class", "post-title");
   title.innerText = data.title;
   let text = document.createElement("p");
-  let image = document.createElement('img')
-  image.src = data.image
+  let image = document.createElement("img");
+  image.src = data.image;
   image.setAttribute("class", "post-image");
   text.setAttribute("class", "post-text");
   text.innerText = data.post;
@@ -293,7 +293,7 @@ gifBtn.addEventListener("click", (e) => {
   let gifSearchBtn = document.createElement("button");
   gifSearchBtn.type = "button";
   gifSearchBtn.textContent = "Search";
-  gifSearchBtn.addEventListener('click', getSearchGifs)
+  gifSearchBtn.addEventListener("click", getSearchGifs);
   gifCloseBtn.textContent = "Close";
   gifCloseBtn.type = "button";
   gifBtnContainer.append(gifSearchBtn, gifCloseBtn);
@@ -302,8 +302,8 @@ gifBtn.addEventListener("click", (e) => {
   gifDiv.append(inputWrapper, imgDiv);
 
   document.getElementById("new-post-form").appendChild(gifDiv);
-  console.log("function called")
-  getTrendingGifs()
+  console.log("function called");
+  getTrendingGifs();
 });
 
 gifCloseBtn.addEventListener("click", () => {
@@ -316,7 +316,7 @@ newPostForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   let postTitle = document.getElementById("form-title").value;
   let postBody = document.getElementById("form-text").value;
-  let postGif = document.getElementById('form-img').src
+  let postGif = document.getElementById("form-img").src;
   let response = await fetch("https://say-it-project.herokuapp.com/blogs", {
     method: "POST",
     headers: {
@@ -332,7 +332,6 @@ newPostForm.addEventListener("submit", async (e) => {
     }),
   });
   location.reload();
-  
 });
 
 let postText = document.getElementById("form-text");

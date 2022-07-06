@@ -120,7 +120,34 @@ class Blog {
                 console.log(err);
             }  
     }
-        
+    
+    static addReaction(blogId, index) {
+        try{
+            const jsonString = fs.readFileSync("./data.json", "utf8");
+            const blog = JSON.parse(jsonString);
+            const reactionArray = blog.posts[blogId-1].reaction;
+            for(let i=0;i<reactionArray.length;i++){
+            if(index === i){
+                const reactionValue = reactionArray[i];
+                const newReactionValue = reactionValue + 1;
+                reactionArray[i] = newReactionValue;
+                fs.writeFile('./data.json', JSON.stringify(blog, null, 2), (err) =>{
+                    if(err){
+                        console.log("Error appending new blog to JSON: ", err);
+                    } else {
+                        console.log("\nFile contents of file after append: ", 
+                        fs.readFileSync("./data.json", "utf8"));
+                    }
+                } )
+            }
+
+            }
+            
+
+        } catch (err){
+            console.log(err)
+        }
+    }
        
        
     }

@@ -6,7 +6,7 @@
       "post": "stuff",
       "image": "",
       "reaction": [
-        0,
+        2,
         0,
         0
       ],
@@ -49,7 +49,7 @@
       "reaction": [
         0,
         0,
-        0
+        1
       ],
       "reply": []
     },
@@ -110,7 +110,7 @@
       "image": "",
       "reaction": [
         0,
-        0,
+        2,
         0
       ],
       "reply": []

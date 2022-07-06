@@ -3,6 +3,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 const Blog = require('./models/blog');
+require("dotenv").config();
+const axios = require('axios');
 
 
 const app = express();
@@ -37,6 +39,20 @@ app.get('/blogs/:id', (req,res) => {
     
 })
 
+app.post('/reactions', (req, res) => {
+    const blogId = parseInt(req.body.id);
+    const index = req.body.index;
+    const numOfBlogs = Blog.all.length;
+    if(blogId > numOfBlogs || blogId <= 0){
+        const err = "Error: This blog doesn't exist."
+        res.send(err);
+    }  else {
+        Blog.addReaction(blogId,index);
+        res.send({message: 'Reaction successfully sent.'})
+    }
+
+})
+
 app.post('/replies', (req,res) => {
     const blogId = parseInt(req.body.id);
     const reply = req.body.text;
@@ -48,6 +64,25 @@ app.post('/replies', (req,res) => {
     } else {
         Blog.addComment(blogId,reply);
         res.send({message: 'Reply successfully sent.'})
+    }
+})
+
+app.get('/gifs', async (req,res)=> {            //trending GIFs
+    try{
+        const result = await axios.get(`https://api.giphy.com/v1/gifs/trending?api_key=${process.env.GIF_API_KEY}`);
+        res.send(result.data);
+    } catch(err) {
+        res.send(err);
+    }
+    
+})
+
+app.get('/gifs/:search', async (req,res) => {   //searching GIFs
+    try{
+        const result = await axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIF_API_KEY}&q=${req.params.search}`);
+        res.send(result.data);
+    } catch(err) {
+        res.send(err);
     }
 })
 

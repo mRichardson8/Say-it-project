@@ -2,7 +2,7 @@
 const Blog = require('./blog');
 const fs = require('fs');
 
- 
+//  Blog.addReaction(9,1);
 
 
 
