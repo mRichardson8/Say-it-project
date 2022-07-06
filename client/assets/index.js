@@ -75,6 +75,10 @@ function createGifs(gifData){
   for (let i = 0; i < gifData.length; i++) {
     let img = document.createElement('img')
     img.src = gifData[i].images.downsized.url
+    img.addEventListener('click', () => {
+      let postImage = document.querySelector('#form-img')
+      postImage.src = img.src
+    })
     imageBox.appendChild(img)
   }
 }
@@ -87,6 +91,9 @@ function createPost(data) {
   title.setAttribute("class", "post-title");
   title.innerText = data.title;
   let text = document.createElement("p");
+  let image = document.createElement('img')
+  image.src = data.image
+  image.setAttribute("class", "post-image");
   text.setAttribute("class", "post-text");
   text.innerText = data.post;
   let btnPost = document.createElement("button");
@@ -100,7 +107,7 @@ function createPost(data) {
   replies.setAttribute("class", "post-replies");
   //add function to populate the replies div
   reactions.append(btnPost);
-  postBox.append(title, text, reactions);
+  postBox.append(title, image, text, reactions);
   postList.append(postBox, replyBox, replies);
 }
 
@@ -309,7 +316,7 @@ newPostForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   let postTitle = document.getElementById("form-title").value;
   let postBody = document.getElementById("form-text").value;
-  let postGif = ""; //document.getElementById('post-img').src //TODO need to add blank img into the form details
+  let postGif = document.getElementById('form-img').src
   let response = await fetch("https://say-it-project.herokuapp.com/blogs", {
     method: "POST",
     headers: {
@@ -324,12 +331,8 @@ newPostForm.addEventListener("submit", async (e) => {
       reply: [],
     }),
   });
-  if (response.status(204)) {
-    location.reload();
-  } else {
-    console.log("Huge error");
-    console.log(response.body);
-  }
+  location.reload();
+  
 });
 
 let postText = document.getElementById("form-text");
