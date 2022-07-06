@@ -5,14 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Say it!</title>
-    <link rel="stylesheet" href="assets/styles.css" />
+    <link rel="stylesheet" href="./assets/styles.css" />
     <script defer src="assets/index.js"></script>
   </head>
   <body>
     <header><h1>Say it!</h1></header>
     <main>
       <form action="" id="new-post-form">
-        <input type="text" name="form-title" id="form-title" placeholder="Title your post">
+        <input
+          type="text"
+          name="form-title"
+          id="form-title"
+          placeholder="Title your post"
+        />
+        <img id="form-img" src="">
         <textarea
           name="form-text"
           id="form-text"
@@ -20,14 +26,12 @@
         ></textarea>
         <p id="text-counter">140</p>
         <div class="btn-container">
-          <button class="btn" id="gif-btn">GIF</button>
+          <button type="button" class="btn" id="gif-btn">GIF</button>
           <button class="btn" id="submit-btn" type="submit">Post</button>
         </div>
       </form>
 
-      <section id="post-list">
-        
-      </section>
+      <section id="post-list"></section>
     </main>
   </body>
 </html>
