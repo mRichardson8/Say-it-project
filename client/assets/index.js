@@ -149,6 +149,9 @@ function createReactions(reactArr) {
 
 function createReplies(repliesArr) {
   let replies = document.createElement("div");
+  if (repliesArr.length == 0){
+    replies.style.visibility = 'hidden'
+  }
   repliesArr.forEach((string) => {
     let p = document.createElement("p");
     p.setAttribute("class", "reply-text");
@@ -160,6 +163,7 @@ function createReplies(repliesArr) {
 
 function appendReply(postIndex, replyText) {
   replies = document.getElementById("post-list").children[postIndex];
+  replies.style.visibility = 'visible'
   let p = document.createElement("p");
   p.setAttribute("class", "reply-text");
   p.innerText = replyText;
@@ -272,14 +276,7 @@ async function postReply(replyText, postID) {
   }
 }
 
-//event listeners
-
-// add a new div to handle the gif keyboard, this dif starts with display set to none but when button is clicked it becomes flex
-const gifBtn = document.getElementById("gif-btn");
-const gifDiv = document.createElement("div");
-const gifCloseBtn = document.createElement("button");
-
-gifBtn.addEventListener("click", (e) => {
+function createGifBox(){
   gifDiv.setAttribute("class", "gif-box");
   let inputWrapper = document.createElement("div");
   inputWrapper.setAttribute("class", "input-wrapper");
@@ -293,21 +290,38 @@ gifBtn.addEventListener("click", (e) => {
   let gifSearchBtn = document.createElement("button");
   gifSearchBtn.type = "button";
   gifSearchBtn.textContent = "Search";
-  gifSearchBtn.addEventListener("click", getSearchGifs);
+  gifSearchBtn.addEventListener('click', getSearchGifs)
   gifCloseBtn.textContent = "Close";
   gifCloseBtn.type = "button";
   gifBtnContainer.append(gifSearchBtn, gifCloseBtn);
   let imgDiv = document.createElement("div");
   imgDiv.setAttribute("class", "image-box");
   gifDiv.append(inputWrapper, imgDiv);
-
   document.getElementById("new-post-form").appendChild(gifDiv);
-  console.log("function called");
-  getTrendingGifs();
-});
+  console.log("function called")
+  gifDiv.style.display = 'none'
+  getTrendingGifs()
+}
+
+//event listeners
+
+// add a new div to handle the gif keyboard, this dif starts with display set to none but when button is clicked it becomes flex
+  const gifBtn = document.getElementById("gif-btn");
+  const gifDiv = document.createElement("div");
+  const gifCloseBtn = document.createElement("button");
+  createGifBox()
+  
+  gifBtn.addEventListener("click", (e) => {
+    if (gifDiv.style.display == "none"){
+      gifDiv.style.display = "block";
+    } else{
+      gifDiv.style.display = "none";
+    }
+    
+  });
 
 gifCloseBtn.addEventListener("click", () => {
-  gifDiv.style.visibility = "hidden";
+  gifDiv.style.display = "none";
 });
 
 //details from new blog post are sent as a post request to the server. If successful the page reloads
@@ -336,12 +350,11 @@ newPostForm.addEventListener("submit", async (e) => {
 
 let postText = document.getElementById("form-text");
 postText.addEventListener("input", (e) => {
-  console.log("Tappity tap");
   if (postText.value.length > 140) {
     postText.value = postText.value.slice(0, 140);
   }
   let textCounter = document.getElementById("text-counter");
-  textCounter.innerText = (140 - postText.value.length).toString();
+  textCounter.innerText = `${(140 - postText.value.length)} characters remaining`.toString();
 });
 
 //Run the setup

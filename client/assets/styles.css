@@ -242,7 +242,6 @@ main {
   left: -0.2rem;
   overflow-y: scroll;
   position: sticky;
-  visibility: visible;
 }
 
 .input-wrapper {
