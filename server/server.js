@@ -67,8 +67,7 @@ app.post('/replies', (req,res) => {
     }
 })
 
-app.get('/gifs', async (req,res)=> {            //trending GIFS
-    console.log(process.env.GIF_API_KEY);
+app.get('/gifs', async (req,res)=> {            //trending GIFs
     try{
         const result = await axios.get(`https://api.giphy.com/v1/gifs/trending?api_key=${process.env.GIF_API_KEY}`);
         res.send(result.data);
@@ -78,7 +77,7 @@ app.get('/gifs', async (req,res)=> {            //trending GIFS
     
 })
 
-app.get('/gifs/:search', async (req,res) => {
+app.get('/gifs/:search', async (req,res) => {   //searching GIFs
     try{
         const result = await axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIF_API_KEY}&q=${req.params.search}`);
         res.send(result.data);
