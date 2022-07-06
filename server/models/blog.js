@@ -64,10 +64,7 @@ class Blog {
                  fs.writeFile('./data.json', JSON.stringify(blog, null, 2), (err) =>{
                      if(err){
                          console.log("Error appending new blog to JSON: ", err);
-                     } else {
-                         console.log("\nFile contents of file after append: ", 
-                         fs.readFileSync("./data.json", "utf8"));
-                     }
+                     } 
                  } )
                  
              }
