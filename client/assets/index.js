@@ -237,15 +237,26 @@ async function postReply(replyText, postID){
 // add a new div to handle the gif keyboard, this dif starts with display set to none but when button is clicked it becomes flex
 let gifBtn = document.getElementById("gif-btn");
 gifBtn.addEventListener("click", (e) => {
-  let gifDiv = document.getElementById("gif-cont");
-  gifDiv.style.display = "flex";
+  let gifDiv = document.createElement("div");
+  gifDiv.setAttribute('class', 'gif-box')
+  let gifSearch = document.createElement('input')
+  gifSearch.type = 'search';
+  gifSearch.placeholder = 'Enter a search term'
+  let gifSearchBtn = document.createElement('button')
+  gifSearchBtn.textContent = 'Search'
+  let gifCloseBtn = document.createElement('button')
+  gifCloseBtn.textContent = 'Close'
+  let imgDiv = document.createElement("div");
+  gifDiv.setAttribute('class', 'image-box')
+  gifDiv.append(gifSearch, gifSearchBtn, gifCloseBtn, imgDiv)
+  document.getElementById('new-post-form').appendChild(gifDiv)  
 });
 
 //details from new blog post are sent as a post request to the server. If successful the page reloads
 let newPostForm = document.getElementById("new-post-form");
 newPostForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  let postTitle = document.getElementById('form-title').value
+  let postTitle = document.getElementById('form-title').value;
   let postBody = document.getElementById("form-text").value;
   let postGif = ""; //document.getElementById('post-img').src //TODO need to add blank img into the form details
   let response = await fetch("https://say-it-project.herokuapp.com/blogs", {
