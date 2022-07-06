@@ -59,9 +59,9 @@ async function getTrendingGifs(){
 async function getSearchGifs(){
   try{
     let searchTerm = document.querySelector('.gif-box input').value
-    let response = await fetch(`https://say-it-project.herokuapp.com/gif/${searchTerm}`);
+    let response = await fetch(`https://say-it-project.herokuapp.com/gifs/${searchTerm}`);
     let data = await response.json()
-    createGifs(response)
+    createGifs(data.data)
   } catch(err){
     console.log("error fetching search endpoint gifs")
   }
@@ -71,6 +71,7 @@ async function getSearchGifs(){
 function createGifs(gifData){
   console.log("inside createGifs func")
   let imageBox = document.querySelector('.image-box')
+  imageBox.textContent = ''
   for (let i = 0; i < gifData.length; i++) {
     let img = document.createElement('img')
     img.src = gifData[i].images.downsized.url
