@@ -53,7 +53,7 @@ class Blog {
                      if(err) {
                          console.log("Error writing file: ", err)
                      } else {
-                         console.log('Successfully wrote file');
+                         console.log('Successfully added blog and wrote to data.json');
                      }
                  })
              }
@@ -66,7 +66,9 @@ class Blog {
                  fs.writeFile('./data.json', JSON.stringify(blog, null, 2), (err) =>{
                      if(err){
                          console.log("Error appending new blog to JSON: ", err);
-                     } 
+                     } else {
+                        console.log("Successfully added blog and appended to data.json");
+                     }
                  } )
                  
              }
@@ -108,9 +110,9 @@ class Blog {
             blog.posts[blogId-1].reply.push(reply)
             fs.writeFile('./data.json', JSON.stringify(blog, null, 2), (err) =>{
                 if(err){
-                    console.log("Error appending new blog to JSON: ", err);
+                    console.log("Error adding new reply to data.json: ", err);
                 } else {
-                    console.log("\nFile contents of file after append: ", 
+                    console.log("Reply successfully added to data.json:", 
                     fs.readFileSync("./data.json", "utf8"));
                 }
             } )
@@ -132,9 +134,9 @@ class Blog {
                 reactionArray[i] = newReactionValue;
                 fs.writeFile('./data.json', JSON.stringify(blog, null, 2), (err) =>{
                     if(err){
-                        console.log("Error appending new blog to JSON: ", err);
+                        console.log("Error adding new reaction to data.json: ", err);
                     } else {
-                        console.log("\nFile contents of file after append: ", 
+                        console.log("Reaction successfully added to data.json: ", 
                         fs.readFileSync("./data.json", "utf8"));
                     }
                 } )
