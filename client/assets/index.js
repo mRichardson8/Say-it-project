@@ -22,12 +22,16 @@ let testObj = [
 //! This function runs when the window first loads and retrieves all the posts from the server. For each post retrieved, the createPost function is called passing in that post as an argument
 
 async function getPosts() {
+  console.log("running")
   try {
     let response = await fetch("https://say-it-project.herokuapp.com/blogs");
     let data = await response.json();
     console.log(data);
+    console.log(data.length);
     for (let i = 0; i < data.length; i++) {
+      
       createPost(data[i]);
+      console.log('created')
     }
     addEmojiListeners();
   } catch (err) {
@@ -285,6 +289,7 @@ function createGifBox(){
   let gifBtnContainer = document.createElement("div");
   gifBtnContainer.setAttribute("class", "gif-btn-container");
   gifSearch.type = "search";
+  console.log("running")
   gifSearch.placeholder = "Enter a search term";
   gifSearch.setAttribute("class", "gif-input");
   inputWrapper.append(gifSearch, gifBtnContainer);
@@ -310,7 +315,7 @@ function createGifBox(){
   const gifBtn = document.getElementById("gif-btn");
   const gifDiv = document.createElement("div");
   const gifCloseBtn = document.createElement("button");
-  createGifBox()
+  
   
   gifBtn.addEventListener("click", (e) => {
     if (gifDiv.style.display == "none"){
@@ -359,4 +364,14 @@ postText.addEventListener("input", (e) => {
 });
 
 //Run the setup
-getPosts();
+//getPosts();
+//createGifBox()
+module.exports = {
+  getPosts,
+  createPost,
+  addEmojiListeners,
+  createGifBox,
+  getTrendingGifs,
+  createReactions,
+  createReplies
+}

@@ -7,15 +7,15 @@
     "test": "test"
   },
   "scripts": {
-    "test": "jest --watchAll",
-    "coverage" : "jest --coverage"
-
+    "test": "jest --env=jsdom --watchAll ",
+    "coverage": "jest --env=jsdom --coverage"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "jest": "^28.1.2",
-    "jest-environment-jsdom": "^28.1.2"
+    "jest-environment-jsdom": "^28.1.2",
+    "jest-fetch-mock": "^3.0.3"
   }
 }
