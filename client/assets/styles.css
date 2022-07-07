@@ -1,5 +1,9 @@
 /* Global styles */
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Splash&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alex+Brush&family=Edu+QLD+Beginner:wght@400;500;700&family=Roboto:wght@400;700&family=Splash&display=swap");
+@font-face {
+  font-family: Regina;
+  src: url(./ReginaScript-d9xAX.ttf);
+}
 
 /*
 =============== 
@@ -23,8 +27,12 @@ Variables
 }
 
 body {
-  margin: 0;
   font-family: "Roboto", sans-serif;
+  /* background: linear-gradient(#80ffdb, #64dfdf, #48bfe3, #5390d9, #5e60ce); */
+  background-image: url(./bg-img-2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 ul {
@@ -34,7 +42,8 @@ ul {
 /* Header styling */
 
 header {
-  background-color: aliceblue;
+  background-color: ghostwhite;
+  /* opacity: 0.6; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,7 +54,9 @@ header {
 header h1 {
   margin: 20px;
   font-size: 3.5rem;
+  /* color: gold; */
   font-family: "Splash", cursive;
+  text-shadow: 2px 2px 5px #006b88;
 }
 
 /* Main */
@@ -64,6 +75,7 @@ main {
   border-radius: var(--radius);
   margin-bottom: 2rem;
   box-shadow: var(--light-shadow);
+  background-color: ghostwhite;
 }
 
 #form-title {
@@ -146,23 +158,38 @@ main {
   padding: 1rem;
   margin-bottom: 0.3rem;
   box-shadow: var(--light-shadow);
+  border-radius: var(--radius);
+  position: relative;
+  background-color: ghostwhite;
 }
 
 .post-title {
   text-transform: uppercase;
-  font-size: small;
+  font-size: 1rem;
   color: brown;
   margin-bottom: 0.75rem;
+  font-family: "Edu QLD Beginner", cursive;
 }
 
 .post-text {
   line-height: 1.5rem;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   margin-bottom: 0.7rem;
+  font-family: "Edu QLD Beginner", cursive;
 }
 
 .post-image {
-  width: 6rem;
+  width: 9rem;
+  display: block;
+  margin: 0 auto;
+}
+
+.date-post {
+  position: absolute;
+  right: 0.8rem;
+  top: 0.5rem;
+  font-size: 0.8rem;
+  opacity: 65%;
 }
 
 /* Reactions - Emojis */
@@ -177,7 +204,7 @@ main {
   align-items: center;
   margin-right: 0.3rem;
   padding: 0.3rem 0.4rem;
-  background-color: aliceblue;
+  background-color: #dbf3fa;
   border-radius: 1rem;
   cursor: pointer;
   transition: var(--transition);
@@ -188,7 +215,7 @@ main {
 }
 
 .img-emoji {
-  width: 18px;
+  width: 20px;
   margin-right: 0.25rem;
 }
 
@@ -238,16 +265,17 @@ main {
 }
 
 .reply-text {
-  font-size: 0.9rem;
-  background-color: aliceblue;
+  font-size: 1.1rem;
+  background-color: #f5fcff;
+  font-family: "Edu QLD Beginner", cursive;
   border-radius: var(--radius);
   padding: 0.5rem;
   margin-bottom: 0.5rem;
-  color: blue;
+  color: black;
 }
 
 .reply-text:nth-child(even) {
-  background-color: #92bee5;
+  background-color: #dbf3fa;
 }
 
 /* Gif Box */
