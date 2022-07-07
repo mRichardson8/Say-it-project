@@ -71,16 +71,22 @@ describe('API server', () => {
         .expect(200, done)
     })
 
-//   it('it responds to post blogs with statusCode 201', done => {
+  it('it responds to post blogs with statusCode 201', done => {
     
-//      request(api)
-//     .post('/blogs')
-//     .expect(201, done)
-//   })
+     request(api)
+    .post('/blogs')
+    .expect(201, done)
+  })
 
 it('it responds to post blogs reactions with statusCode 201', done => {
     request(api)
     .post('/reactions')
+    .expect(201, done)
+})
+
+it('it responds to post blogs replies with statusCode 201', done => {
+    request(api)
+    .post('/replies')
     .expect(201, done)
 })
 

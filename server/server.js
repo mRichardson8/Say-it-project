@@ -63,7 +63,7 @@ app.post('/replies', (req,res) => {
         res.send(err);
     } else {
         Blog.addComment(blogId,reply);
-        res.send({message: 'Reply successfully sent.'})
+        res.status(201).send({message: 'Reply successfully sent.'})
     }
 })
 
