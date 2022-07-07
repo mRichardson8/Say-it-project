@@ -8,6 +8,7 @@ class Blog {
         this.image = data.image;
         this.reaction = data.reaction;
         this.reply = data.reply;
+        this.date = data.date;
 
     }
 
@@ -43,7 +44,8 @@ class Blog {
              const blog = JSON.parse(jsonString);
              if(Object.entries(blog).length === 0) {
                  const newBlogId = Object.entries(blog.posts).length + 1;
-                 const newBlog = new Blog({id: newBlogId, ...funny});  //first we create the new blog to be added to the json file
+                 const date = new Date();
+                 const newBlog = new Blog({id: newBlogId, date: date, ...funny});  //first we create the new blog to be added to the json file
  
             
                  blog.posts.push(newBlog);
@@ -57,9 +59,9 @@ class Blog {
              }
              else {
                  const newBlogId = Object.entries(blog.posts).length + 1;
-                 const newBlog = new Blog({id: newBlogId, ...funny});  //first we create the new blog to be added to the json file
+                 const date = new Date();
+                 const newBlog = new Blog({id: newBlogId, date: date, ...funny});  //first we create the new blog to be added to the json file
  
-        
                  blog.posts.push(newBlog);
                  fs.writeFile('./data.json', JSON.stringify(blog, null, 2), (err) =>{
                      if(err){
