@@ -131,7 +131,7 @@ function createReactions(reactArr) {
   span1.setAttribute("class", "emoji-count");
   span1.innerText = reactArr[0];
   let img1 = document.createElement("img");
-  img1.src = "./assets/panic.gif";
+  img1.src = "./assets/homer-disappear.gif";
   img1.setAttribute("class", "img-emoji");
   div1.append(img1, span1);
   let div2 = document.createElement("div");
@@ -140,7 +140,7 @@ function createReactions(reactArr) {
   span2.setAttribute("class", "emoji-count");
   span2.innerText = reactArr[1];
   let img2 = document.createElement("img");
-  img2.src = "./assets/emoji2.png";
+  img2.src = "./assets/cool-doge.gif";
   img2.setAttribute("class", "img-emoji");
   div2.append(img2, span2);
   let div3 = document.createElement("div");
@@ -149,7 +149,7 @@ function createReactions(reactArr) {
   span3.setAttribute("class", "emoji-count");
   span3.innerText = reactArr[2];
   let img3 = document.createElement("img");
-  img3.src = "./assets/emoji3.png";
+  img3.src = "./assets/meow_code.gif";
   img3.setAttribute("class", "img-emoji");
   div3.append(img3, span3);
   reactions.append(div1, div2, div3);
