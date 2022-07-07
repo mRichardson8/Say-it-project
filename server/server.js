@@ -12,17 +12,17 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.get('/', (req,res) => {
-    res.send('hello world!');
+    res.status(200).send('hello world!');
 })
 app.post('/blogs', (req, res) => {
     const data = req.body;
     const newBlog = Blog.create(data);
-    res.send({message: `${newBlog.title} successfully added`})
+    res.status(201).send({message: `${newBlog.title} successfully added`})
 })
 
 app.get('/blogs', (req, res) => {
     const blogs = Blog.all;
-    res.send(blogs);
+    res.status(200).send(blogs);
 })
 
 app.get('/blogs/:id', (req,res) => {
@@ -34,7 +34,7 @@ app.get('/blogs/:id', (req,res) => {
         res.send(err);
     } else {
         const selectedBlog = Blog.getBlogById(blogId);
-        res.send(selectedBlog);
+        res.status(200).send(selectedBlog);
     }
     
 })
@@ -48,7 +48,7 @@ app.post('/reactions', (req, res) => {
         res.send(err);
     }  else {
         Blog.addReaction(blogId,index);
-        res.send({message: 'Reaction successfully sent.'})
+        res.status(201).send({message: 'Reaction successfully sent.'})
     }
 
 })
@@ -70,7 +70,7 @@ app.post('/replies', (req,res) => {
 app.get('/gifs', async (req,res)=> {            //trending GIFs
     try{
         const result = await axios.get(`https://api.giphy.com/v1/gifs/trending?api_key=${process.env.GIF_API_KEY}`);
-        res.send(result.data);
+        res.status(200).send(result.data);
     } catch(err) {
         res.send(err);
     }
@@ -80,7 +80,7 @@ app.get('/gifs', async (req,res)=> {            //trending GIFs
 app.get('/gifs/:search', async (req,res) => {   //searching GIFs
     try{
         const result = await axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIF_API_KEY}&q=${req.params.search}`);
-        res.send(result.data);
+        res.status(200).send(result.data);
     } catch(err) {
         res.send(err);
     }
