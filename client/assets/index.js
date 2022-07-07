@@ -27,7 +27,11 @@ async function getPosts() {
     let data = await response.json();
     console.log(data);
     for (let i = 0; i < data.length; i++) {
-      createPost(data[i]);
+      try {
+        createPost(data[i]);
+      } catch (error) {
+        continue;
+      }
     }
     addEmojiListeners();
   } catch (err) {
@@ -90,6 +94,11 @@ function createPost(data) {
   let title = document.createElement("h2");
   title.setAttribute("class", "post-title");
   title.innerText = data.title;
+  let date = document.createElement("p");
+  date.setAttribute("class", "date-post");
+  let dateText = new Date();
+  dateText.setTime(Date.parse(data.date));
+  date.innerText = `Post created: ${dateText.toString().slice(0, 24)}`;
   let text = document.createElement("p");
   let image = document.createElement("img");
   image.src = data.image;
@@ -107,7 +116,7 @@ function createPost(data) {
   replies.setAttribute("class", "post-replies");
   //add function to populate the replies div
   reactions.append(btnPost);
-  postBox.append(title, image, text, reactions);
+  postBox.append(title, date, image, text, reactions);
   postList.append(postBox, replyBox, replies);
 }
 
@@ -149,8 +158,8 @@ function createReactions(reactArr) {
 
 function createReplies(repliesArr) {
   let replies = document.createElement("div");
-  if (repliesArr.length == 0){
-    replies.style.visibility = 'hidden'
+  if (repliesArr.length == 0) {
+    replies.style.visibility = "hidden";
   }
   repliesArr.forEach((string) => {
     let p = document.createElement("p");
@@ -163,7 +172,7 @@ function createReplies(repliesArr) {
 
 function appendReply(postIndex, replyText) {
   replies = document.getElementById("post-list").children[postIndex];
-  replies.style.visibility = 'visible'
+  replies.style.visibility = "visible";
   let p = document.createElement("p");
   p.setAttribute("class", "reply-text");
   p.innerText = replyText;
@@ -277,7 +286,7 @@ async function postReply(replyText, postID) {
   }
 }
 
-function createGifBox(){
+function createGifBox() {
   gifDiv.setAttribute("class", "gif-box");
   let inputWrapper = document.createElement("div");
   inputWrapper.setAttribute("class", "input-wrapper");
@@ -291,7 +300,7 @@ function createGifBox(){
   let gifSearchBtn = document.createElement("button");
   gifSearchBtn.type = "button";
   gifSearchBtn.textContent = "Search";
-  gifSearchBtn.addEventListener('click', getSearchGifs)
+  gifSearchBtn.addEventListener("click", getSearchGifs);
   gifCloseBtn.textContent = "Close";
   gifCloseBtn.type = "button";
   gifBtnContainer.append(gifSearchBtn, gifCloseBtn);
@@ -299,27 +308,26 @@ function createGifBox(){
   imgDiv.setAttribute("class", "image-box");
   gifDiv.append(inputWrapper, imgDiv);
   document.getElementById("new-post-form").appendChild(gifDiv);
-  console.log("function called")
-  gifDiv.style.display = 'none'
-  getTrendingGifs()
+  console.log("function called");
+  gifDiv.style.display = "none";
+  getTrendingGifs();
 }
 
 //event listeners
 
 // add a new div to handle the gif keyboard, this dif starts with display set to none but when button is clicked it becomes flex
-  const gifBtn = document.getElementById("gif-btn");
-  const gifDiv = document.createElement("div");
-  const gifCloseBtn = document.createElement("button");
-  createGifBox()
-  
-  gifBtn.addEventListener("click", (e) => {
-    if (gifDiv.style.display == "none"){
-      gifDiv.style.display = "block";
-    } else{
-      gifDiv.style.display = "none";
-    }
-    
-  });
+const gifBtn = document.getElementById("gif-btn");
+const gifDiv = document.createElement("div");
+const gifCloseBtn = document.createElement("button");
+createGifBox();
+
+gifBtn.addEventListener("click", (e) => {
+  if (gifDiv.style.display == "none") {
+    gifDiv.style.display = "block";
+  } else {
+    gifDiv.style.display = "none";
+  }
+});
 
 gifCloseBtn.addEventListener("click", () => {
   gifDiv.style.display = "none";
@@ -355,7 +363,9 @@ postText.addEventListener("input", (e) => {
     postText.value = postText.value.slice(0, 140);
   }
   let textCounter = document.getElementById("text-counter");
-  textCounter.innerText = `${(140 - postText.value.length)} characters remaining`.toString();
+  textCounter.innerText = `${
+    140 - postText.value.length
+  } characters remaining`.toString();
 });
 
 //Run the setup

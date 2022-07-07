@@ -146,11 +146,12 @@ main {
   padding: 1rem;
   margin-bottom: 0.3rem;
   box-shadow: var(--light-shadow);
+  position: relative;
 }
 
 .post-title {
   text-transform: uppercase;
-  font-size: small;
+  font-size: 1rem;
   color: brown;
   margin-bottom: 0.75rem;
 }
@@ -162,7 +163,17 @@ main {
 }
 
 .post-image {
-  width: 6rem;
+  width: 9rem;
+  display: block;
+  margin: 0 auto;
+}
+
+.date-post {
+  position: absolute;
+  right: 0.8rem;
+  top: 0.5rem;
+  font-size: 0.8rem;
+  opacity: 65%;
 }
 
 /* Reactions - Emojis */
