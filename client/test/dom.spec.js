@@ -48,9 +48,25 @@ describe('index.js', () => {
         console.log(postList)
         expect(postList).toBeDefined()
     })
-    it ('A gif box should be created on startup', () => {
+    it ('A gif box should be created on startup with two children', () => {
         indexFunctions.createGifBox()
         let gifDiv = document.querySelector('.gif-box')
         expect(gifDiv.children.length).toEqual(2)
+    })
+    it ('should have a new post be created using the post object received', () => {
+        indexFunctions.createPost(testBlog.posts[0])
+        let postList = document.querySelector('#post-list')
+        expect(postList.children.length).toEqual(3)
+    })
+    it ('Should populate the page with dummy posts if the getTestPosts function is called', () => {
+        indexFunctions.getTestPosts()
+        let postList = document.querySelector('#post-list')
+        expect(postList.children.length).toEqual(6)
+    })
+    it ('Should add a div containing the emojis and related emoji data', () => {
+        indexFunctions.createReactions([1,2,3])
+        let reactDiv = document.querySelector('.reactions-wrapper')
+        expect(reactDiv.children.length).toEqual(3)
+
     })
 });

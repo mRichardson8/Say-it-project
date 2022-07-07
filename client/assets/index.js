@@ -3,18 +3,22 @@ let testObj = [
   {
     title: "Why not",
     post: "Why not take a crazy chance, why not do a crazy dance!",
-    reactions: [1, 2, 3],
+    reaction: [1, 2, 3],
     reply: [
       "I love Hilary Duff",
       "I hate Hilary Duff",
       "I think Hilary Duff is just alright",
     ],
+    img: '',
+    date: ''
   },
   {
     title: "Just can't get enough",
     post: "When I'm with you baby, I go out of my head. And I just can't get enough, And I just can't get enough.",
-    reactions: [1, 2, 3],
+    reaction: [1, 2, 3],
     reply: ["Depeche mode is the best", "Who is depeche mode?"],
+    img: '',
+    date: ''
   },
 ];
 
@@ -373,5 +377,6 @@ module.exports = {
   createGifBox,
   getTrendingGifs,
   createReactions,
-  createReplies
+  createReplies,
+  getTestPosts
 }
