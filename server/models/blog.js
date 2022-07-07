@@ -35,7 +35,7 @@ class Blog {
         //get an error.
 
         //first we need to read the json file to see if there are any blogs
-        fs.readFile("../data.json", "utf8", (err, jsonString) => {
+        fs.readFile("./data.json", "utf8", (err, jsonString) => {
          if(err) {
              console.log("Error reading file from data.json: ", err);
              return
@@ -49,7 +49,7 @@ class Blog {
  
             
                  blog.posts.push(newBlog);
-                 fs.writeFile('../data.json', JSON.stringify(blog, null, 2), err => {
+                 fs.writeFile('./data.json', JSON.stringify(blog, null, 2), err => {
                      if(err) {
                          console.log("Error writing file: ", err)
                      } else {
@@ -63,7 +63,7 @@ class Blog {
                  const newBlog = new Blog({id: newBlogId, date: date, ...funny});  //first we create the new blog to be added to the json file
  
                  blog.posts.push(newBlog);
-                 fs.writeFile('../data.json', JSON.stringify(blog, null, 2), (err) =>{
+                 fs.writeFile('./data.json', JSON.stringify(blog, null, 2), (err) =>{
                      if(err){
                          console.log("Error appending new blog to JSON: ", err);
                      } 
