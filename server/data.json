@@ -2,144 +2,65 @@
   "posts": [
     {
       "id": 1,
-      "title": "this is my stuff",
-      "post": "stuff",
-      "image": "",
+      "title": "Coffee",
+      "post": "I really like coffee guys ☕",
+      "image": "https://media4.giphy.com/media/3oriO04qxVReM5rJEA/giphy.gif?cid=c0aa05a81sqarbx0w8d3fi89qjv8j14s4l3u5pyzynqiad1e&rid=giphy.gif&ct=g",
       "reaction": [
-        2,
         0,
-        0
+        5,
+        2
       ],
       "reply": [
-        "i like your stuff",
-        "your stuff sucks",
-        "i like eggs",
-        "new reply"
-      ]
+        "I'm more of a tea person myself 🧐🍵"
+      ],
+      "date": "2022-07-04T11:32:21.509Z"
     },
     {
       "id": 2,
-      "title": "My love for chicken wings",
-      "post": "I like chicken wings",
-      "image": "",
+      "title": "Overlord ",
+      "post": "Overlord is a very good anime",
+      "image": "https://media0.giphy.com/media/ew3CmRvP3arMQ/giphy.gif?cid=c0aa05a8cib2hcap8h5cunxxt79wjqsf9lhjqxnek6soutlj&rid=giphy.gif&ct=g",
       "reaction": [
-        0,
-        0,
-        0
+        4,
+        4,
+        2
       ],
-      "reply": []
+      "reply": [
+        "Can't wait for the new season!"
+      ],
+      "date": "2022-07-05T13:53:11.981Z"
     },
     {
       "id": 3,
-      "title": "My love for chicken wings",
-      "post": "I like chicken wings",
-      "image": "",
+      "title": "My Life Cycle",
+      "post": "Eat, Sleep, Code, Repeat",
+      "image": "https://media3.giphy.com/media/VbnUQpnihPSIgIXuZv/giphy-downsized.gif?cid=c0aa05a8z6nxsebelxua39j02tlaonmd6a6n8a6kb52ssku2&rid=giphy-downsized.gif&ct=g",
       "reaction": [
-        0,
-        0,
-        0
+        1,
+        4,
+        6
       ],
-      "reply": []
+      "reply": [
+        "So relatable!",
+        "Haha, that's so me!",
+        "Life is pain"
+      ],
+      "date": "2022-07-07T10:49:55.262Z"
     },
     {
       "id": 4,
-      "title": "dummy post",
-      "post": "Hello this is my blog post post",
-      "image": "",
+      "title": "#006b88",
+      "post": "What do you think of this hex code guys. haha",
+      "image": "https://media1.giphy.com/media/3oEdv07JVXwhImYGWc/giphy-downsized.gif?cid=c0aa05a8qv6pv7m74yl8xph2etpqgfto3s3v2bjaox80mjr7&rid=giphy-downsized.gif&ct=g",
       "reaction": [
-        0,
-        0,
+        4,
+        1,
         1
       ],
-      "reply": []
-    },
-    {
-      "id": 5,
-      "title": "dummy post",
-      "post": "Hello this is my blog post post",
-      "image": "",
-      "reaction": [
-        0,
-        0,
-        0
-      ],
       "reply": [
-        "Another new reply"
-      ]
-    },
-    {
-      "id": 6,
-      "title": "dummy post",
-      "post": "Hello this is my blog post post",
-      "image": "",
-      "reaction": [
-        0,
-        0,
-        0
+        "I don't understand the joke"
       ],
-      "reply": []
-    },
-    {
-      "id": 7,
-      "title": "dummy post",
-      "post": "Hello this is my blog post post",
-      "image": "",
-      "reaction": [
-        0,
-        0,
-        0
-      ],
-      "reply": []
-    },
-    {
-      "id": 8,
-      "title": "dummy post",
-      "post": "Hello this is my blog post post the latest",
-      "image": "",
-      "reaction": [
-        0,
-        0,
-        0
-      ],
-      "reply": []
-    },
-    {
-      "id": 9,
-      "title": "dummy post",
-      "post": "Hello this is my blog post post the latestx2",
-      "image": "",
-      "reaction": [
-        0,
-        2,
-        0
-      ],
-      "reply": []
-    },
-    {
-      "id": 10,
-      "title": "this is my stuff",
-      "post": "stuff",
-      "image": "",
-      "reaction": [
-        2,
-        0,
-        0
-      ],
-      "reply": [
-        "i like your stuff",
-        "your stuff sucks",
-        "i like eggs",
-        "new reply"
-      ],
-      "date": "2022-07-07T08:57:55.879Z"
-    },
-    {
-      "id": 11,
-      "date": "2022-07-07T11:43:08.815Z"
-    },
-    {
-      "id": 12,
-      "date": "2022-07-07T11:44:28.356Z"
+      "date": "2022-07-07T15:25:08.262Z"
     }
   ]
 }
