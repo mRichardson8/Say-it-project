@@ -28,8 +28,7 @@ Variables
 
 body {
   font-family: "Roboto", sans-serif;
-  /* background: linear-gradient(#80ffdb, #64dfdf, #48bfe3, #5390d9, #5e60ce); */
-  background-image: url(./bg-img-2.jpg);
+  background-image: url(./images/bg-img-2.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -43,7 +42,6 @@ ul {
 
 header {
   background-color: ghostwhite;
-  /* opacity: 0.6; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,9 +52,7 @@ header {
 header h1 {
   margin: 20px;
   font-size: 3.5rem;
-  /* color: gold; */
   font-family: "Splash", cursive;
-  /* text-shadow: 2px 2px 5px #006b88; */
 }
 
 /* Main */
@@ -327,8 +323,3 @@ main {
 .image-box img {
   width: 8rem;
 }
-
-/* .image-box {
-  background-color: #654321;
- 
-} */
