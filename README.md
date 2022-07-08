@@ -1,12 +1,12 @@
 # Say it! </br>
-Community journaling<br>
-We have made the app such that users who cannot express their thoughts can freely write them without the need of identifying a name. As a result, we have given the name Say it!
+
+We have made the web-app such that users who cannot express their thoughts can freely write them without the need of identifying a name. As a result, we have given the name Say it!
 
 With the following features:
 
 - User can Post<br>
 - User can like, comment and recomment on an existing posts✉️ <br>
-- User can see all posts that have been sent 🗂
+- User can see all posts that have been posted 🗂
 
 
  # Front-end
@@ -22,7 +22,7 @@ With the following features:
 
  ✅Listen for submit btn<br>
  ✅Get data from the user<br>
- ✅fetch POST /blogs with the data
+ ✅fetch POST /blogs with the data<br>
  ✅fetch Get /blogs<br>
  ⬅️ Retrieve data from a server on the client 
  using Fetch<br>
@@ -52,8 +52,8 @@ With the following features:
 
  #
 
+![](images/Say-it-web-app.png)
 
-![](images/sayit%20screenshot.png)
 
 
 
