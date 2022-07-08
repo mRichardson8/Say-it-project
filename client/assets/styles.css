@@ -1,15 +1,6 @@
-/* Global styles */
 @import url("https://fonts.googleapis.com/css2?family=Alex+Brush&family=Edu+QLD+Beginner:wght@400;500;700&family=Roboto:wght@400;700&family=Splash&display=swap");
-@font-face {
-  font-family: Regina;
-  src: url(./ReginaScript-d9xAX.ttf);
-}
 
-/*
-=============== 
-Variables
-===============
-*/
+/* Variables */
 
 :root {
   --clr-white: #fff;
@@ -19,6 +10,8 @@ Variables
   --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
+
+/* Global styles */
 
 * {
   padding: 0;
@@ -38,7 +31,7 @@ ul {
   list-style: none;
 }
 
-/* Header styling */
+/* Header */
 
 header {
   background-color: ghostwhite;
@@ -56,6 +49,7 @@ header h1 {
 }
 
 /* Main */
+
 main {
   width: 90vw;
   max-width: 1170px;
@@ -63,7 +57,8 @@ main {
   display: grid;
 }
 
-/* form styles */
+/* Form */
+
 #new-post-form,
 .reply-box {
   max-width: 600px;
@@ -146,7 +141,8 @@ main {
   }
 }
 
-/* Post List styles */
+/* Posts */
+
 .post-box,
 .post-replies {
   max-width: 600px;
@@ -229,7 +225,7 @@ main {
   background-color: #654321;
 }
 
-/*  Replies input box */
+/*  Submit Reply box */
 
 .reply-box {
   max-width: 600px;
@@ -264,7 +260,6 @@ main {
   background-color: #f5fcff;
   border-bottom: 1px solid #dbf3fa;
   font-family: "Edu QLD Beginner", cursive;
-  /* border-radius: var(--radius); */
   padding: 0.5rem;
   margin-bottom: 0.5rem;
   color: black;
@@ -275,7 +270,7 @@ main {
   border-bottom: 1px solid #006b88;
 }
 
-/* Gif Box */
+/* Gifs */
 
 .gif-box {
   width: 400px;
@@ -283,7 +278,6 @@ main {
   background-color: aliceblue;
   border-radius: 1rem;
   padding: 1rem 0.75rem;
-  /* position: absolute; */
   top: 9rem;
   left: -0.2rem;
   overflow-y: scroll;
