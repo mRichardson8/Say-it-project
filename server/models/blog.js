@@ -15,7 +15,7 @@ class Blog {
     static get all(){
         let blogs; 
         try {
-            const jsonString = fs.readFileSync("./data.json", "utf8"); //need to change this back to one dot
+            const jsonString = fs.readFileSync("./data.json", "utf8"); 
         
             const blog = JSON.parse(jsonString);
               
@@ -60,7 +60,7 @@ class Blog {
              else {
                  const newBlogId = Object.entries(blog.posts).length + 1;
                  const date = new Date();
-                 const newBlog = new Blog({id: newBlogId, date: date, ...funny});  //first we create the new blog to be added to the json file
+                 const newBlog = new Blog({id: newBlogId, date: date, ...funny});  
  
                  blog.posts.push(newBlog);
                  fs.writeFile('./data.json', JSON.stringify(blog, null, 2), (err) =>{
@@ -84,7 +84,7 @@ class Blog {
      static getBlogById(blogId) {
         let blogs; 
         try {
-            const jsonString = fs.readFileSync("./data.json", "utf8"); // remember to remove one of the dots when you link to the endpoint
+            const jsonString = fs.readFileSync("./data.json", "utf8"); 
         
             const blog = JSON.parse(jsonString);
               
@@ -104,7 +104,7 @@ class Blog {
 
     static addComment(blogId, reply){ 
         try {
-            const jsonString = fs.readFileSync("./data.json", "utf8"); //need to change this back to one dot
+            const jsonString = fs.readFileSync("./data.json", "utf8"); 
         
             const blog = JSON.parse(jsonString);
             blog.posts[blogId-1].reply.push(reply)
