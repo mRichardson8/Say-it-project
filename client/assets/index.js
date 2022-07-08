@@ -1,31 +1,7 @@
-// test variables
-let testObj = [
-  {
-    title: "Why not",
-    post: "Why not take a crazy chance, why not do a crazy dance!",
-    reactions: [1, 2, 3],
-    reply: [
-      "I love Hilary Duff",
-      "I hate Hilary Duff",
-      "I think Hilary Duff is just alright",
-    ],
-  },
-  {
-    title: "Just can't get enough",
-    post: "When I'm with you baby, I go out of my head. And I just can't get enough, And I just can't get enough.",
-    reactions: [1, 2, 3],
-    reply: ["Depeche mode is the best", "Who is depeche mode?"],
-  },
-];
-
-//functions
-//! This function runs when the window first loads and retrieves all the posts from the server. For each post retrieved, the createPost function is called passing in that post as an argument
-
 async function getPosts() {
   try {
     let response = await fetch("https://say-it-project.herokuapp.com/blogs");
     let data = await response.json();
-    console.log(data);
     for (let i = 0; i < data.length; i++) {
       try {
         createPost(data[i]);
@@ -35,24 +11,14 @@ async function getPosts() {
     }
     addEmojiListeners();
   } catch (err) {
-    console.log(err);
+    console.log("error collecting blogs from server");
   }
-}
-
-//! For testing createPost before server implementation
-function getTestPosts() {
-  let data = testObj;
-  for (let i = 0; i < data.length; i++) {
-    createPost(data[i]);
-  }
-  addEmojiListeners();
 }
 
 async function getTrendingGifs() {
   try {
     let response = await fetch("https://say-it-project.herokuapp.com/gifs");
     let data = await response.json();
-    console.log(data);
     createGifs(data.data);
   } catch (err) {
     console.log("error fetching trending gifs");
@@ -73,7 +39,6 @@ async function getSearchGifs() {
 }
 
 function createGifs(gifData) {
-  console.log("inside createGifs func");
   let imageBox = document.querySelector(".image-box");
   imageBox.textContent = "";
   for (let i = 0; i < gifData.length; i++) {
@@ -86,7 +51,7 @@ function createGifs(gifData) {
     imageBox.appendChild(img);
   }
 }
-//! This function takes in an individual post and renders the post, the reactions and the comments as HTML
+
 function createPost(data) {
   let postList = document.getElementById("post-list");
   let postBox = document.createElement("div");
@@ -109,22 +74,18 @@ function createPost(data) {
   btnPost.setAttribute("class", "btn");
   btnPost.textContent = "reply";
   let reactions = createReactions(data.reaction);
-  // add function to populate the reactions div
   let replies = createReplies(data.reply);
   let replyBox = createReplyBox();
   addReplyListeners(btnPost, replyBox);
   replies.setAttribute("class", "post-replies");
-  //add function to populate the replies div
   reactions.append(btnPost);
   postBox.append(title, date, image, text, reactions);
   postList.append(postBox, replyBox, replies);
 }
 
 function createReactions(reactArr) {
-  //reactArr = [1,2,3]
   let reactions = document.createElement("div");
   reactions.setAttribute("class", "reactions-wrapper");
-  //TODO read from the array of reactions and create a div populated with the reaction emojis and their respective numbers
   let div1 = document.createElement("div");
   div1.setAttribute("class", "emoji-container");
   let span1 = document.createElement("span");
@@ -179,12 +140,8 @@ function appendReply(postIndex, replyText) {
   replies.appendChild(p);
 }
 
-function submitPost(e) {
-  return;
-}
 
 async function submitEmoji(e, index) {
-  console.log("clicked", index);
   let parent = e.currentTarget.parentNode.parentNode.parentNode;
   let child = e.currentTarget.parentNode.parentNode;
   let postID = Array.prototype.indexOf.call(parent.children, child);
@@ -199,12 +156,6 @@ async function submitEmoji(e, index) {
     },
     body: JSON.stringify({ index: index, id: (postID + 3) / 3 }),
   });
-  if (response.status(204)) {
-    //e.currentTarget.children[1].innerText = (parseInt(e.currentTarget.children[1].innerText) + 1).toString()
-  } else {
-    console.log("Huge error");
-    console.log(response.body);
-  }
 }
 
 function addEmojiListeners() {
@@ -249,9 +200,7 @@ function createReplyBox() {
   submitReply.type = "submit";
   submitReply.innerText = "Submit";
   submitReply.setAttribute("class", "reply-btn");
-  //button event listener
   submitReply.addEventListener("click", () => {
-    console.log("clicked");
     let parent = replyDiv.parentNode;
     let child = replyDiv;
     var index = Array.prototype.indexOf.call(parent.children, child);
@@ -282,7 +231,7 @@ async function postReply(replyText, postID) {
       body: JSON.stringify({ text: replyText, id: postID }),
     });
   } catch (err) {
-    console.log(err);
+    console.log("error posting reply");
   }
 }
 
@@ -308,14 +257,10 @@ function createGifBox() {
   imgDiv.setAttribute("class", "image-box");
   gifDiv.append(inputWrapper, imgDiv);
   document.getElementById("new-post-form").appendChild(gifDiv);
-  console.log("function called");
   gifDiv.style.display = "none";
   getTrendingGifs();
 }
 
-//event listeners
-
-// add a new div to handle the gif keyboard, this dif starts with display set to none but when button is clicked it becomes flex
 const gifBtn = document.getElementById("gif-btn");
 const gifDiv = document.createElement("div");
 const gifCloseBtn = document.createElement("button");
@@ -333,7 +278,6 @@ gifCloseBtn.addEventListener("click", () => {
   gifDiv.style.display = "none";
 });
 
-//details from new blog post are sent as a post request to the server. If successful the page reloads
 let newPostForm = document.getElementById("new-post-form");
 newPostForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -368,5 +312,4 @@ postText.addEventListener("input", (e) => {
   } characters remaining`.toString();
 });
 
-//Run the setup
 getPosts();
