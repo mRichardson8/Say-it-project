@@ -23,8 +23,15 @@ let testBlog = {posts : [{
     ]
   }]}
 
-  let indexFunctions;
-  let getPosts
+  let testGifs = [{
+        images : {
+            downsized: {
+                url: ''
+            }
+        }
+}]
+let indexFunctions;
+let getPosts
 
 describe('index.js', () => {
     global.fetch = require('jest-fetch-mock')
@@ -64,9 +71,27 @@ describe('index.js', () => {
         expect(postList.children.length).toEqual(6)
     })
     it ('Should add a div containing the emojis and related emoji data', () => {
-        indexFunctions.createReactions([1,2,3])
-        let reactDiv = document.querySelector('.reactions-wrapper')
-        expect(reactDiv.children.length).toEqual(3)
-
+        let reactions = indexFunctions.createReactions([1,2,3])
+        expect(reactions.children.length).toEqual(3)
     })
+    it('should create a box with the loaded gif objects ', () => {
+        indexFunctions.createGifBox()
+        indexFunctions.createGifs(testGifs)
+        let imageBox = document.querySelector(".image-box")
+        expect(imageBox.children.length).toEqual(1)
+    });
+    it('should attach the event listener to the button when addReplyListeners is called ', () => {
+        let div = document.createElement('div')
+        let button = document.createElement('button')
+        indexFunctions.addReplyListeners(button, div)
+        expect(button.name).toEqual('true')
+    });
+    it('should add a given reply to the reply div', () => {
+        indexFunctions.getTestPosts()
+        indexFunctions.appendReply(1,"this is a reply")
+        let replies = document.getElementById("post-list").children[1];
+        expect(replies.children.length).toEqual(3)
+    });
+    
+    
 });

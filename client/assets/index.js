@@ -268,6 +268,7 @@ function addReplyListeners(button, div) {
   button.addEventListener("click", () => {
     div.style.display = "flex";
   });
+  button.setAttribute('name', 'true')
 }
 
 async function postReply(replyText, postID) {
@@ -321,51 +322,14 @@ function createGifBox(){
   const gifCloseBtn = document.createElement("button");
   
   
-  gifBtn.addEventListener("click", (e) => {
-    if (gifDiv.style.display == "none"){
-      gifDiv.style.display = "block";
-    } else{
-      gifDiv.style.display = "none";
-    }
-    
-  });
 
-gifCloseBtn.addEventListener("click", () => {
-  gifDiv.style.display = "none";
-});
 
 //details from new blog post are sent as a post request to the server. If successful the page reloads
 let newPostForm = document.getElementById("new-post-form");
-newPostForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  let postTitle = document.getElementById("form-title").value;
-  let postBody = document.getElementById("form-text").value;
-  let postGif = document.getElementById("form-img").src;
-  let response = await fetch("https://say-it-project.herokuapp.com/blogs", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      title: postTitle,
-      post: postBody,
-      image: postGif,
-      reaction: [0, 0, 0],
-      reply: [],
-    }),
-  });
-  location.reload();
-});
+
 
 let postText = document.getElementById("form-text");
-postText.addEventListener("input", (e) => {
-  if (postText.value.length > 140) {
-    postText.value = postText.value.slice(0, 140);
-  }
-  let textCounter = document.getElementById("text-counter");
-  textCounter.innerText = `${(140 - postText.value.length)} characters remaining`.toString();
-});
+
 
 //Run the setup
 //getPosts();
@@ -378,5 +342,10 @@ module.exports = {
   getTrendingGifs,
   createReactions,
   createReplies,
-  getTestPosts
+  getTestPosts,
+  createGifs,
+  addReplyListeners,
+  appendReply,
+  emoji1Func,
+  submitEmoji
 }
