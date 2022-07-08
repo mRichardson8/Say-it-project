@@ -56,7 +56,7 @@ header h1 {
   font-size: 3.5rem;
   /* color: gold; */
   font-family: "Splash", cursive;
-  text-shadow: 2px 2px 5px #006b88;
+  /* text-shadow: 2px 2px 5px #006b88; */
 }
 
 /* Main */
@@ -71,15 +71,14 @@ main {
 #new-post-form,
 .reply-box {
   max-width: 600px;
-  padding: 0.5rem 0.75rem;
+  padding: 1rem 0.75rem;
   border-radius: var(--radius);
   margin-bottom: 2rem;
-  box-shadow: var(--light-shadow);
   background-color: ghostwhite;
 }
 
 #form-title {
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
 
 #form-img {
@@ -174,7 +173,7 @@ main {
 .post-text {
   line-height: 1.5rem;
   font-size: 1.2rem;
-  margin-bottom: 0.7rem;
+  margin: 1rem 0;
   font-family: "Edu QLD Beginner", cursive;
 }
 
@@ -202,7 +201,7 @@ main {
 .emoji-container {
   display: flex;
   align-items: center;
-  margin-right: 0.3rem;
+  margin-right: 0.5rem;
   padding: 0.3rem 0.4rem;
   background-color: #dbf3fa;
   border-radius: 1rem;
@@ -211,11 +210,11 @@ main {
 }
 
 .emoji-container:hover {
-  border: 1px solid #92bee5;
+  border: 1px solid #006b88;
 }
 
 .img-emoji {
-  width: 20px;
+  width: 19.5px;
   margin-right: 0.25rem;
 }
 
@@ -267,8 +266,9 @@ main {
 .reply-text {
   font-size: 1.1rem;
   background-color: #f5fcff;
+  border-bottom: 1px solid #dbf3fa;
   font-family: "Edu QLD Beginner", cursive;
-  border-radius: var(--radius);
+  /* border-radius: var(--radius); */
   padding: 0.5rem;
   margin-bottom: 0.5rem;
   color: black;
@@ -276,6 +276,7 @@ main {
 
 .reply-text:nth-child(even) {
   background-color: #dbf3fa;
+  border-bottom: 1px solid #006b88;
 }
 
 /* Gif Box */
